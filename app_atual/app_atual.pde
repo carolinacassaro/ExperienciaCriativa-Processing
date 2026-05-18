@@ -12,5 +12,5 @@ void setup() {
   tint(12,242);
   image(img, 0, 0);
   tint(255,255);
-  image(imgt,0,0);
+  image(imgt,-280,-380);
 }
