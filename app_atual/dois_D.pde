@@ -1,29 +1,34 @@
 
 void view2d(){
   background(0);
-  // menu:
   
+  // -- menu: -- 
   menu2opcoes = 4;
   
-  btnHeight = 100;
-  btnWidth = 200;
-  
+  // -----------------------
+
+  // -- cria os botoes: -- 
   for(int i = 0; i<menu2opcoes; i++){
     button(i);
   }
   
-  if(mousePressed){
-    if (mouseX >= 0 && mouseX <= btnWidth && mouseY  >= 0 && mouseY <= btnHeight) svar = 21;
-    if (mouseX >= 0 && mouseX <= btnWidth && mouseY  >= 0 && mouseY <= btnHeight*2) svar = 22; 
+  // -----------------------
   
+  // -- cria ativacao dos botoes: --
+  if(mousePressed){
+    for(int i = 0; i<menu2opcoes; i++){
+      if (mouseX >= 0 && mouseX <= btnWidth && mouseY  >= btnHeight*i && mouseY <= btnHeight*(i+1)) svar = 21 + i;
+    }  
   }
+  // -----------------------
   
 }
 
 
-void button(int order){
-  fill(255);
-  stroke(0);
-  strokeWeight(1);
-  rect(0,0+order*bHeight,btnWidth,bHeight);
+void view2d_1(){
+  background(255);
+}
+
+void view2d_2(){
+  background(0);
 }
