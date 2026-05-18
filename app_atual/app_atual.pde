@@ -6,10 +6,11 @@ void settings() {
 }
 
 void setup() {
-  imgt = loadImage("tit.png");
+  imgt = loadImage("titulo.png");
   img = loadImage("pf.png");
   img.resize(width, height);
-  imgt.resize(width/2, height/2);
+  tint(12,242);
   image(img, 0, 0);
-  image(imgt, 0, 0);
+  tint(255,255);
+  image(imgt,0,0);
 }
