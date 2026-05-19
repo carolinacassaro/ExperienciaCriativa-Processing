@@ -10,6 +10,10 @@ int imgtW = -280;
 int imgtH = -380;
 PImage imge;
 PImage impal;
+int impalX = 650;
+int impalY = 150;
+int impalW = 800;
+int impalH = 550;
 
 // ------------------------
 
