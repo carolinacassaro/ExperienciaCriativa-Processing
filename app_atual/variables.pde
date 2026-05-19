@@ -3,11 +3,11 @@ int svar;
 
 // ------------------------
 
-// Pág.Principal - imagens
-PImage img;
-PImage imgt;
-int imgtW = -280;
-int imgtH = -380;
+// Pág.Inicial - imagens
+PImage imgInicial;
+PImage imgB2d;
+int imgB2dX = width;
+int imgB2dY = height/2;
 PImage imge;
 PImage impal;
 int impalX = 650;
