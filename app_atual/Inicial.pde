@@ -1,9 +1,10 @@
 void viewInicial(){
   image(imgInicial, 0, 0, width, height);
-  image(imgB2d,imgB2dX,imgB2dY);
   
  if(mousePressed){
-   if (mouseX >= impalX && mouseX <= impalX + impalW && mouseY >= impalY && mouseY <= impalY + impalH){
+   if (mouseX >= b2dX && mouseX <= b2dX + imgBotao.width && mouseY >= b2dY && mouseY <= b2dY + imgBotao.height){
    svar = 2;}
+   if (mouseX >= b3dX && mouseX <= b3dX + imgBotao.width && mouseY >= b3dY && mouseY <= b3dY + imgBotao.height){
+   svar = 3;}
  }
 }

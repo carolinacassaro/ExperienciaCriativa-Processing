@@ -22,6 +22,8 @@ void view2d(){
   }
   // -----------------------
   
+  // -- especifica os botoes --
+  
 }
 
 
