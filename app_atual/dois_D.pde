@@ -1,6 +1,6 @@
 
 void view2d(){
-  background(0);
+  background(255);
   
   // -- menu: -- 
   menu2opcoes = 4;
@@ -23,7 +23,17 @@ void view2d(){
   // -----------------------
   
   // -- especifica os botoes --
+  fill(255);
+  triangle(btnWidth/4,btnHeight*3/4,btnWidth*3/4,btnHeight*3/4,btnWidth/2,btnHeight/4);
+  rect(btnWidth/4,btnHeight*1.25, btnWidth/2, btnHeight/2);
+  circle(btnWidth/2,btnHeight*2.5,btnWidth/3);
   
+  // -----------------------
+  // cria o botao de voltar
+  buttonBack(1); 
+  
+  
+
 }
 
 

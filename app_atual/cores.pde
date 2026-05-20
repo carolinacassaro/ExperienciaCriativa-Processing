@@ -1,1 +1,1 @@
-color light_green = color(#c1d8c5);
+color light_green = #c1d8c5;

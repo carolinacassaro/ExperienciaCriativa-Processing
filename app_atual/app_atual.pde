@@ -24,3 +24,15 @@ void button(int order){
   strokeWeight(1);
   rect(0,0+order*btnHeight,btnWidth,btnHeight);
 }
+
+void buttonBack(int redirection){
+  fill(light_green);
+  stroke(0);
+  strokeWeight(1);
+  rect(0,height-btnHeight,btnWidth,btnHeight);
+  text("←",btnWidth/2,(height-btnHeight)/2);
+  
+  if(mousePressed){
+    if (mouseX >= 0 && mouseX <= btnWidth && mouseY  >= height-btnHeight && mouseY <= height) svar = redirection;
+  }
+}
