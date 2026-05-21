@@ -4,7 +4,6 @@ void view2d(){
   menu2d();
   
   
-  
 }
 
 void view2d_1(){

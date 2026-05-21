@@ -4,6 +4,11 @@ int width = 1500;
 int height = 700;
 PFont fonte;
 
+int canvaW = width-200;
+int canvaH = height;
+int canvaX = 200;
+int canvaY = 0;
+
 // ------------------------
 
 // Pág.Inicial - imagens
@@ -14,11 +19,7 @@ float b2dY = height/2.4;
 float b3dX = width/1.69;
 float b3dY = height/2.4;
 PImage imge;
-PImage impal;
-int impalX = 650;
-int impalY = 150;
-int impalW = 800;
-int impalH = 550;
+
 
 // ------------------------
 
