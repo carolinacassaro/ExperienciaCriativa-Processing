@@ -30,7 +30,10 @@ void buttonBack(int redirection){
   stroke(0);
   strokeWeight(1);
   rect(0,height-btnHeight,btnWidth,btnHeight);
-  text("←",btnWidth/2,(height-btnHeight)/2);
+  fill(0);
+  textSize(64);
+  textAlign(CENTER, CENTER);
+  text("←",btnWidth/2,height-btnHeight/2);
   
   if(mousePressed){
     if (mouseX >= 0 && mouseX <= btnWidth && mouseY  >= height-btnHeight && mouseY <= height) svar = redirection;
