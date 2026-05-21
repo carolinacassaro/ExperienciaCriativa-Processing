@@ -1,8 +1,28 @@
 
 void view2d(){
   background(255);
+  menu2d();
   
-  // -- menu: -- 
+}
+
+
+void view2d_1(){
+  menu2d();
+  fill(0);
+  rect(btnWidth,0,width-btnWidth, height);
+  
+}
+
+void view2d_2(){
+  menu2d();
+  fill(0);
+  rect(btnWidth,0,width-btnWidth, height);
+}
+
+
+
+void menu2d(){
+    // -- menu: -- 
   menu2opcoes = 6;
   
   // -----------------------
@@ -51,17 +71,5 @@ void view2d(){
   
   // -----------------------
   // cria o botao de voltar
-  buttonBack(1); 
-  
-  
-
-}
-
-
-void view2d_1(){
-  background(255);
-}
-
-void view2d_2(){
-  background(0);
+  buttonBack(1);
 }
