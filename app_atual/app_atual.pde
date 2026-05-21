@@ -5,6 +5,8 @@ void settings(){
 void setup() {
   imgInicial = loadImage("pagInicial.png");
   imgBotao = loadImage("botaoInicial.png");
+  fonte = createFont("Arial", 64, true);
+  textFont(fonte);
 
   svar = 1;
 }
@@ -14,28 +16,4 @@ void draw(){
     if (svar == 2) view2d();
       if (svar == 21) view2d_1();
     if (svar == 3) view3d();
-}
-
-
-
-void button(int order){
-  fill(light_green);
-  stroke(0);
-  strokeWeight(1);
-  rect(0,0+order*btnHeight,btnWidth,btnHeight);
-}
-
-void buttonBack(int redirection){
-  fill(light_green);
-  stroke(0);
-  strokeWeight(1);
-  rect(0,height-btnHeight,btnWidth,btnHeight);
-  fill(0);
-  textSize(64);
-  textAlign(CENTER, CENTER);
-  text("←",btnWidth/2,height-btnHeight/2);
-  
-  if(mousePressed){
-    if (mouseX >= 0 && mouseX <= btnWidth && mouseY  >= height-btnHeight && mouseY <= height) svar = redirection;
-  }
 }

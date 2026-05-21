@@ -2,6 +2,7 @@
 int svar;
 int width = 1500;
 int height = 700;
+PFont fonte;
 
 // ------------------------
 

@@ -10,3 +10,25 @@ void desenharHexagono(float x, float y, float raio) {
   }
   endShape(CLOSE); // Fecha a forma ligando o último vértice ao primeiro
 }
+
+void button(int order){
+  fill(light_green);
+  stroke(0);
+  strokeWeight(1);
+  rect(0,0+order*btnHeight,btnWidth,btnHeight);
+}
+
+void buttonBack(int redirection){
+  fill(light_green);
+  stroke(0);
+  strokeWeight(1);
+  rect(0,height-btnHeight,btnWidth,btnHeight);
+  fill(0);
+  textSize(64);
+  textAlign(CENTER, CENTER);
+  text("←",btnWidth/2,height-btnHeight/2);
+  
+  if(mousePressed){
+    if (mouseX >= 0 && mouseX <= btnWidth && mouseY  >= height-btnHeight && mouseY <= height) svar = redirection;
+  }
+}
