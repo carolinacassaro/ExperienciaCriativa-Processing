@@ -3,20 +3,37 @@ void view2d(){
   background(255);
   menu2d();
   
-  
 }
 
 void view2d_1(){
   menu2d();
-  fill(0);
-  rect(btnWidth,0,width-btnWidth, height);
+  fill(light_green);
+  rect(canvaX,canvaY,canvaW,canvaH);
+  
+  // -- cria figura avaliada --
+  fill(255);
+  triangle(canvaX+canvaW*1/13,canvaH*5/14, // vertice inferiror esquerdo
+  canvaX+canvaW*3/13,canvaH*5/14, // vertice inferior direito
+  canvaX+canvaW*2/13, canvaH*2/14 ); // vertice superior
+  
+  // ----------------------------
+  
+  // -- cria titulos da direita --
+  
+  titulo("ÁREA", canvaX+canvaW*4.5/13, canvaH*1/14);
+  
+  titulo("ALTURA", canvaX+canvaW*4.5/13, canvaH*3/14);
+    
+  
+  
+  // ----------------------------
   
 }
 
 void view2d_2(){
   menu2d();
   fill(0);
-  rect(btnWidth,0,width-btnWidth, height);
+  rect(canvaX,canvaY,canvaW, canvaH);
 }
 
 

@@ -12,14 +12,14 @@ void desenharHexagono(float x, float y, float raio) {
 }
 
 void button(int order){
-  fill(light_green);
+  fill(backgroundButton);
   stroke(0);
   strokeWeight(1);
   rect(0,0+order*btnHeight,btnWidth,btnHeight);
 }
 
 void buttonBack(int redirection){
-  fill(light_green);
+  fill(backgroundButton);
   stroke(0);
   strokeWeight(1);
   rect(0,height-btnHeight,btnWidth,btnHeight);
@@ -31,4 +31,21 @@ void buttonBack(int redirection){
   if(mousePressed){
     if (mouseX >= 0 && mouseX <= btnWidth && mouseY  >= height-btnHeight && mouseY <= height) svar = redirection;
   }
+}
+
+void titulo(String texto, float x, float y){
+  fill(200);
+  float tituloX = x;
+  float tituloY = y;
+  float tituloW = canvaW*7/13;
+  float tituloH = canvaH*0.5/14;
+  rect(tituloX, tituloY, // posicao
+  tituloW, tituloH, // tamanho
+  30 // raio
+  );
+  
+  fill(0);
+  textSize(10);
+  textAlign(CENTER, CENTER);
+  text(texto, tituloX+tituloW/2, tituloY+tituloH/2);
 }
