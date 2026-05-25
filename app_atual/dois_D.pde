@@ -12,18 +12,56 @@ void view2d_1(){
   
   // -- cria figura avaliada --
   fill(255);
-  triangle(canvaX+canvaW*1/13,canvaH*5/14, // vertice inferiror esquerdo
-  canvaX+canvaW*3/13,canvaH*5/14, // vertice inferior direito
-  canvaX+canvaW*2/13, canvaH*2/14 ); // vertice superior
+  
+  if(triangulo == "Equilátero"){
+    triangle(canvaX+canvaW*1/13,canvaH*5/14, // vertice inferiror esquerdo
+    canvaX+canvaW*3/13,canvaH*5/14, // vertice inferior direito
+    canvaX+canvaW*2/13, canvaH*2/14 ); // vertice superior
+  }
+  else if(triangulo == "Isóceles"){
+    triangle(canvaX+canvaW*1.5/13,canvaH*5/14, // vertice inferiror esquerdo
+    canvaX+canvaW*2.5/13,canvaH*5/14, // vertice inferior direito
+    canvaX+canvaW*2/13, canvaH*2/14 ); // vertice superior
+  }else{
+    triangle(canvaX+canvaW*1.5/13,canvaH*4.5/14, // vertice inferiror esquerdo
+    canvaX+canvaW*2.5/13,canvaH*5/14, // vertice inferior direito
+    canvaX+canvaW*3/13, canvaH*2/14 ); // vertice superior
+    
+  }
+    
+  
   
   // ----------------------------
   
-  // -- cria titulos da direita --
+  // -- cria classificações --
+  
+  float clX = canvaX+canvaW*0.5/13;
+  float clY = canvaH*5.5/14;
+  float clW = 100;
+  float clH = 30;
+  
+  
+  textAlign(CENTER, CENTER);
+  textSize(10);
+   
+  rotulo("Equilátero", clX, clY, clW, clH);
+  rotulo("Isóceles", clX+clW+5, clY, clW, clH);
+  rotulo("Escaleno", clX+(clW+5)*2, clY, clW, clH);
+  
+  
+  
+  // ---------------------------
+  
+  // -- cria módulos na direita --
   
   titulo("ÁREA", canvaX+canvaW*4.5/13, canvaH*1/14);
+  card("deducao", "A = b x h\n-------------\n    2     ", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
   
-  titulo("ALTURA", canvaX+canvaW*4.5/13, canvaH*3/14);
+  if(triangulo == "Equilátero"){
     
+    titulo("ALTURA", canvaX+canvaW*4.5/13, canvaH*5/14);
+    card("deducao2", "h = L x √3\n-------------\n    2     ", canvaX+canvaW*4.5/13, canvaH*6/14, 150, canvaH*2/14);
+  }
   
   
   // ----------------------------
@@ -35,8 +73,6 @@ void view2d_2(){
   fill(0);
   rect(canvaX,canvaY,canvaW, canvaH);
 }
-
-
 
 
 

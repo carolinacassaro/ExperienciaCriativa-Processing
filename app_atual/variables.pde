@@ -34,4 +34,6 @@ int btnWidth = 200;
 
 int menu2opcoes;
 
+String triangulo;
+
 // ------------------------

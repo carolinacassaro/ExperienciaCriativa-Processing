@@ -1,3 +1,4 @@
 void view3d(){
-  background(0);
+  background(244, 246, 245);
+
 }
