@@ -3,6 +3,7 @@ int svar;
 int width = 1500;
 int height = 700;
 PFont fonte;
+String deducao = "";
 
 int canvaW = width-200;
 int canvaH = height;

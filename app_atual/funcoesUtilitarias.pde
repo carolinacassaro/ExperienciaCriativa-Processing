@@ -50,7 +50,7 @@ void titulo(String texto, float x, float y){
   text(texto, tituloX+tituloW/2, tituloY+tituloH/2);
 }
 
-void card(String deducao, String formula, float x, float y, float w, float h){
+void card(String conteudo, String formula, float x, float y, float w, float h){
   fill(240);
   rect(x,y,w,h,20);
   fill(0);
@@ -60,7 +60,7 @@ void card(String deducao, String formula, float x, float y, float w, float h){
   
   if(mousePressed){
    if(mouseX >= x && mouseX <= x+w && mouseY>=y && mouseY<=y+h){
-       popUp(deducao);
+       deducao = conteudo;
      }
   }
  
@@ -80,15 +80,21 @@ void rotulo(String texto, float x, float y, float w, float h){
   }
 }
 
-void popUp(String deducao){
+void popUp(){
   fill(240);
   
   float x = canvaX+canvaW*0.5/13;
-  float y =  canvaY/14;
+  float y =  50;
   float w =  canvaW*12/13;
-  float h = canvaH*13/14;
+  float h = canvaH*12/14;
   rect(x, y ,w, h);
   
   text(deducao, x+w/2, y+h/2);
+  
+  if(keyPressed){
+    if(key == "e"){
+       deducao = "";
+    }
+  }
   
 }
