@@ -16,6 +16,7 @@ void draw(){
     if (svar == 2) view2d();
       if (svar == 21) view2d_1(); 
       if (svar == 22) view2d_2(); 
+      if (svar == 23) view2d_3(); 
     if (svar == 3) view3d();
     
     

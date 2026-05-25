@@ -115,7 +115,30 @@ void view2d_2(){
     // ----------------------------
 }
 
+ void view2d_3(){ // circulo
+  menu2d();
+  fill(light_green);
+  rect(canvaX,canvaY,canvaW, canvaH);
   
+  // -- cria figura avaliada --
+  fill(255);
+  
+  circle(canvaX + canvaW*2/13, canvaY + canvaH*6/24, canvaW*2/13);
+  
+  // ------------------------
+
+  // -- cria módulos na direita --
+    
+    titulo("ÁREA", canvaX+canvaW*4.5/13, canvaH*1/14);
+    card("deducao", "A = pi x R²", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
+      
+     titulo("CIRCUNFERÊNCIA", canvaX+canvaW*4.5/13, canvaH*5/14);
+     card("diagonal", "c = 2 x pi x R", canvaX+canvaW*4.5/13, canvaH*6/14, 150, canvaH*2/14);
+ 
+    
+    
+    // ----------------------------
+}
 
 
 
@@ -134,7 +157,7 @@ void menu2d(){
   // -----------------------
   
   // -- cria ativacao dos botoes: --
-  if(mousePressed){
+  if(mousePressed && deducao.isEmpty()){
     for(int i = 0; i<menu2opcoes; i++){
       if (mouseX >= 0 && mouseX <= btnWidth && mouseY  >= btnHeight*i && mouseY <= btnHeight*(i+1)) svar = 21 + i;
     }  

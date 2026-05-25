@@ -28,7 +28,7 @@ void buttonBack(int redirection){
   textAlign(CENTER, CENTER);
   text("←",btnWidth/2,height-btnHeight/2);
   
-  if(mousePressed){
+  if(mousePressed && deducao.isEmpty()){
     if (mouseX >= 0 && mouseX <= btnWidth && mouseY  >= height-btnHeight && mouseY <= height) svar = redirection;
   }
 }
@@ -86,7 +86,7 @@ void popUp(){
   float x = canvaX+canvaW*0.5/13;
   float y =  canvaY + canvaH*0.5/14;
   float w =  canvaW*12/13;
-  float h = canvaH*12/14;
+  float h = canvaH*13/14;
   rect(x, y ,w, h);
   
   
