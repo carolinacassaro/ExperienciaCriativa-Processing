@@ -84,15 +84,16 @@ void popUp(){
   fill(240);
   
   float x = canvaX+canvaW*0.5/13;
-  float y =  50;
+  float y =  canvaY + canvaH*0.5/14;
   float w =  canvaW*12/13;
   float h = canvaH*12/14;
   rect(x, y ,w, h);
   
+  fill(0);
   text(deducao, x+w/2, y+h/2);
   
   if(keyPressed){
-    if(key == "e"){
+    if(key == ' '){
        deducao = "";
     }
   }

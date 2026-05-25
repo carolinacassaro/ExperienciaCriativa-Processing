@@ -70,12 +70,32 @@ void view2d_1(){
 
 void view2d_2(){
   menu2d();
-  fill(0);
+  fill(light_green);
   rect(canvaX,canvaY,canvaW, canvaH);
+  
+  // -- cria figura avaliada --
+  fill(255);
+  
+  rect(canvaX+canvaW/13, canvaY+canvaH*2/13, canvaW*3/13, canvaH*6/14);
+  
+  // ------------------------
+
+  // -- cria módulos na direita --
+    
+    titulo("ÁREA", canvaX+canvaW*4.5/13, canvaH*1/14);
+    card("deducao", "A = b x h", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
+    
+    if(quadrado){
+      
+      titulo("DIAGONAL", canvaX+canvaW*4.5/13, canvaH*5/14);
+      card("deducao2", "d = L x √2", canvaX+canvaW*4.5/13, canvaH*6/14, 150, canvaH*2/14);
+    }
+    
+    
+    // ----------------------------
 }
 
-
-
+  
 
 
 
