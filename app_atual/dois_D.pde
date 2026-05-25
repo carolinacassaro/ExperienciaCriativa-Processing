@@ -13,12 +13,12 @@ void view2d_1(){
   // -- cria figura avaliada --
   fill(255);
   
-  if(triangulo == "Equilátero"){
+  if(rotulo == "Equilátero"){
     triangle(canvaX+canvaW*1/13,canvaH*5/14, // vertice inferiror esquerdo
     canvaX+canvaW*3/13,canvaH*5/14, // vertice inferior direito
     canvaX+canvaW*2/13, canvaH*2/14 ); // vertice superior
   }
-  else if(triangulo == "Isóceles"){
+  else if(rotulo == "Isóceles"){
     triangle(canvaX+canvaW*1.5/13,canvaH*5/14, // vertice inferiror esquerdo
     canvaX+canvaW*2.5/13,canvaH*5/14, // vertice inferior direito
     canvaX+canvaW*2/13, canvaH*2/14 ); // vertice superior
@@ -57,7 +57,7 @@ void view2d_1(){
   titulo("ÁREA", canvaX+canvaW*4.5/13, canvaH*1/14);
   card("deducao", "A = b x h\n-------------\n    2     ", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
   
-  if(triangulo == "Equilátero"){
+  if(rotulo == "Equilátero"){
     
     titulo("ALTURA", canvaX+canvaW*4.5/13, canvaH*5/14);
     card("deducao2", "h = L x √3\n-------------\n    2     ", canvaX+canvaW*4.5/13, canvaH*6/14, 150, canvaH*2/14);
@@ -76,19 +76,39 @@ void view2d_2(){
   // -- cria figura avaliada --
   fill(255);
   
-  rect(canvaX+canvaW/13, canvaY+canvaH*2/13, canvaW*3/13, canvaH*6/14);
+  if(rotulo == "Quadrado"){
+    rect(canvaX+canvaW/13, canvaY+canvaH*2/13, canvaW*2/13, canvaH*4/14);
+  }else{
+    rect(canvaX+canvaW/13, canvaY+canvaH*2/13, canvaW*3/13, canvaH*4/14);
+  }
   
   // ------------------------
+  
+  // -- cria classificações --
+  
+  float clX = canvaX+canvaW/13;
+  float clY = canvaH*6.5/14;
+  float clW = 100;
+  float clH = 30;
+  
+  
+  textAlign(CENTER, CENTER);
+  textSize(10);
+   
+  rotulo("Quadrado", clX, clY, clW, clH);
+  rotulo("Retangulo", clX+clW+5, clY, clW, clH);
+  
+  // -----------------------------
 
   // -- cria módulos na direita --
     
     titulo("ÁREA", canvaX+canvaW*4.5/13, canvaH*1/14);
     card("deducao", "A = b x h", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
     
-    if(quadrado){
+    if(rotulo == "Quadrado"){
       
       titulo("DIAGONAL", canvaX+canvaW*4.5/13, canvaH*5/14);
-      card("deducao2", "d = L x √2", canvaX+canvaW*4.5/13, canvaH*6/14, 150, canvaH*2/14);
+      card("diagonal", "d = L x √2", canvaX+canvaW*4.5/13, canvaH*6/14, 150, canvaH*2/14);
     }
     
     

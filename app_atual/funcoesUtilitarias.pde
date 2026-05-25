@@ -75,7 +75,7 @@ void rotulo(String texto, float x, float y, float w, float h){
   
   if(mousePressed){
      if(mouseX >= x && mouseX <= x+w && mouseY>=y && mouseY<=y+h){
-       triangulo = texto;
+       rotulo = texto;
      }
   }
 }
@@ -89,8 +89,25 @@ void popUp(){
   float h = canvaH*12/14;
   rect(x, y ,w, h);
   
-  fill(0);
-  text(deducao, x+w/2, y+h/2);
+  
+  
+  if(rotulo == "Quadrado" && deducao == "diagonal"){
+    fill(255);
+    rect(x+w/13, y+h/14, w*2/13, h*4/14);
+    fill(0);
+    line(x+w/13, y+h/14,x+w/13 + w*2/13, y+h/14 + h*4/14);
+    text("A", x+w/13-10, y + h/14 + h*4/14/2);
+    text("B", x+w/13 + w*2/13/2, y + h/14 + h*4/14 + 10);
+    text("d", x+w/13 + w*2/13/2, y + h/14 + h*1.5/14);
+    text("A = B ", x+w/13 + w*2/13/2, y + h/14 + h*6/14);
+    text("d² = A² + A²", x+w/13 + w*2/13/2, y + h/14 + h*7/14);
+    text("d² = 2 x A²", x+w/13 + w*2/13/2, y + h/14 + h*8/14);
+    text("d = √(2 x A²)", x+w/13 + w*2/13/2, y + h/14 + h*9/14);
+    text("d = √2 x A", x+w/13 + w*2/13/2, y + h/14 + h*10/14);
+    text("d = A x √2", x+w/13 + w*2/13/2, y + h/14 + h*11/14);
+
+  }
+  //text(deducao, x+w/2, y+h/2);
   
   if(keyPressed){
     if(key == ' '){
