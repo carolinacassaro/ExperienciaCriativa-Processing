@@ -55,13 +55,8 @@ void view2d_1(){
   // -- cria módulos na direita --
   
   titulo("ÁREA", canvaX+canvaW*4.5/13, canvaH*1/14);
-  card("deducao", "A = b x h\n-------------\n    2     ", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
-  
-  if(rotulo == "Equilátero"){
-    
-    titulo("ALTURA", canvaX+canvaW*4.5/13, canvaH*5/14);
-    card("deducao2", "h = L x √3\n-------------\n    2     ", canvaX+canvaW*4.5/13, canvaH*6/14, 150, canvaH*2/14);
-  }
+  card("deducao", "b x h\n-------------\n    2     ", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
+ 
   
   
   // ----------------------------
@@ -115,7 +110,7 @@ void view2d_2(){
     // ----------------------------
 }
 
- void view2d_3(){ // circulo
+void view2d_3(){ // circulo
   menu2d();
   fill(light_green);
   rect(canvaX,canvaY,canvaW, canvaH);
@@ -140,7 +135,86 @@ void view2d_2(){
     // ----------------------------
 }
 
+void view2d_4(){ // hexagono
+  menu2d();
+  fill(light_green);
+  rect(canvaX,canvaY,canvaW, canvaH);
+  
+  // -- cria figura avaliada --
+  fill(255);
+  
+  desenharHexagono(canvaX + canvaW*2/13, canvaH*4/14, canvaW*1/13);
+  
+  // ------------------------
 
+  // -- cria módulos na direita --
+    
+    titulo("ÁREA", canvaX+canvaW*4.5/13, canvaH*1/14);
+    card("deducao", "a² x √3\n---------------\n4", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
+      
+     titulo("CIRCUNFERÊNCIA", canvaX+canvaW*4.5/13, canvaH*5/14);
+     card("diagonal", "c = 2 x pi x R", canvaX+canvaW*4.5/13, canvaH*6/14, 150, canvaH*2/14);
+ 
+    
+    
+    // ----------------------------
+}
+
+void view2d_5(){ // losango
+  menu2d();
+  fill(light_green);
+  rect(canvaX,canvaY,canvaW, canvaH);
+  
+  // -- cria figura avaliada --
+  fill(255);
+  
+  quad(canvaX+canvaW*2/13, canvaH*2/14, // vertice topo
+  canvaX+canvaW/13, canvaH*3/14, // vertice esquerda
+  canvaX+canvaW*2/13, canvaH*4/14, // vertice baixo
+  canvaX+canvaW*3/13, canvaH*3/14); // vertice direita ;
+  
+  // ------------------------
+
+  // -- cria módulos na direita --
+    
+    titulo("ÁREA", canvaX+canvaW*4.5/13, canvaH*1/14);
+    card("deducao", "a² x √3\n---------------\n4", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
+      
+     titulo("CIRCUNFERÊNCIA", canvaX+canvaW*4.5/13, canvaH*5/14);
+     card("diagonal", "c = 2 x pi x R", canvaX+canvaW*4.5/13, canvaH*6/14, 150, canvaH*2/14);
+ 
+    
+    
+    // ----------------------------
+}
+
+void view2d_6(){ // trapezio
+  menu2d();
+  fill(light_green);
+  rect(canvaX,canvaY,canvaW, canvaH);
+  
+  // -- cria figura avaliada --
+  fill(255);
+  
+  quad(canvaX + canvaW/13, canvaH*4/14,  // Vértice inferior esquerdo
+       canvaX + canvaW*3/13, canvaH*4/14,  // Vértice inferior direito
+       canvaX + canvaW*2.5/13, canvaH*2/14,  // Vértice superior direito
+       canvaX + canvaW*1.5/13, canvaH*2/14);  // Vértice superior esquerdo
+  
+  // ------------------------
+
+  // -- cria módulos na direita --
+    
+    titulo("ÁREA", canvaX+canvaW*4.5/13, canvaH*1/14);
+    card("deducao", "a² x √3\n---------------\n4", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
+      
+     titulo("CIRCUNFERÊNCIA", canvaX+canvaW*4.5/13, canvaH*5/14);
+     card("diagonal", "c = 2 x pi x R", canvaX+canvaW*4.5/13, canvaH*6/14, 150, canvaH*2/14);
+ 
+    
+    
+    // ----------------------------
+}
 
 // /////////////////////////////////////////////////////////////////////////////////
 void menu2d(){
