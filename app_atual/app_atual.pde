@@ -7,6 +7,24 @@ void setup() {
   imgBotao = loadImage("botaoInicial.png");
   fonte = createFont("Arial", 64, true);
   textFont(fonte);
+  
+  // Prisma
+  imgPrismaQuadrado = loadImage("C:/Users/guilh/OneDrive/Imagens/formas/PrismaQuadrado.png");
+  imgPrismaTriangular = loadImage("C:/Users/guilh/OneDrive/Imagens/formas/prismaTriangular.png");
+  imgPrismaHexagonal = loadImage("C:/Users/guilh/OneDrive/Imagens/formas/PrismaHexagonal.png");
+  
+  // Piramide
+  imgPiramideQuadrada = loadImage("C:/Users/guilh/OneDrive/Imagens/formas/piramideQuadrada.png");
+  imgPiramideTriangular = loadImage("C:/Users/guilh/OneDrive/Imagens/formas/PiramideTriangular.png");
+  imgPiramideHexagonal = loadImage("C:/Users/guilh/OneDrive/Imagens/formas/piramideHexagonal.png");
+  
+  // Cone e esfera
+  imgCone3D = loadImage("C:/Users/guilh/OneDrive/Imagens/formas/Cone.png");
+  imgEsfera3D = loadImage("C:/Users/guilh/OneDrive/Imagens/formas/Esfera.png");
+  
+  // Imagens do menu lateral 3D
+  imgCubo3D = imgPrismaQuadrado;
+  imgPiramide3D = imgPiramideQuadrada;
 
   svar = 1;
 }
@@ -21,7 +39,12 @@ void draw(){
       if (svar == 25) view2d_5(); 
       if (svar == 26) view2d_6(); 
     if (svar == 3) view3d();
+      if (svar == 31) view3d_1();
+      if (svar == 32) view3d_2();
+      if (svar == 33) view3d_3();
+      if (svar == 34) view3d_4();
     
-    
-    if (!deducao.isEmpty()){popUp();}
+    if (!deducao.isEmpty()){
+      popUp();
+    }
 }
