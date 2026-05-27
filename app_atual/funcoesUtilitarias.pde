@@ -278,7 +278,7 @@ void popUp(){
     fill(0); noStroke(); textSize(18); textAlign(CENTER, CENTER);
     text("B", fX + fW/2,    fY + fH + 20);
     text("b", fX + fW/2,    fY - 15);
-    text("h", fX + off - 20, fY + fH/2);
+    text("h", fX + off - 40, fY + fH/2);
 
     // Passos
     textAlign(LEFT, TOP); textSize(20);
