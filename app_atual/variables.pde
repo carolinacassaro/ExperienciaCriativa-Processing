@@ -20,6 +20,16 @@ PImage imgPiramide3D;
 PImage imgCone3D;
 PImage imgEsfera3D;
 PImage imgPrismaQuadrado;
+Object hoverSound;
+Object clickSound;
+boolean soundAvailable = false;
+String activeInput = "";
+String valorL = "";
+String valorB = "";
+String valorH = "";
+String valorP = "";
+String valorA = "";
+String valorR = "";
 PImage imgPrismaTriangular;
 PImage imgPrismaHexagonal;
 PImage imgPiramideQuadrada;
@@ -41,7 +51,7 @@ int btnWidth = 200;
 
 // Pag.2D - variables
 int menu2opcoes;
-String rotulo;
+String rotulo = "Equilátero";
 
 // ------------------------
 

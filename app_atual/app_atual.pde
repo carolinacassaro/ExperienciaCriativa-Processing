@@ -26,6 +26,9 @@ void setup() {
   imgCubo3D = imgPrismaQuadrado;
   imgPiramide3D = imgPiramideQuadrada;
 
+  // inicializa som via reflexão se a biblioteca estiver disponível
+  initSound();
+
   svar = 1;
 }
 
@@ -47,4 +50,28 @@ void draw(){
     if (!deducao.isEmpty()){
       popUp();
     }
+}
+
+// Inicializa objetos de som via reflexão para manter compatibilidade
+void initSound(){
+  try{
+    Class<?> sinClass = Class.forName("processing.sound.SinOsc");
+    // marca que som está disponível
+    soundAvailable = true;
+    java.lang.reflect.Constructor<?> ctor = sinClass.getConstructor(Object.class);
+    hoverSound = ctor.newInstance(this);
+    soundSetFreq(hoverSound, 880);
+    soundSetAmp(hoverSound, 0);
+    soundPlay(hoverSound);
+
+    clickSound = ctor.newInstance(this);
+    soundSetFreq(clickSound, 440);
+    soundSetAmp(clickSound, 0);
+    soundPlay(clickSound);
+  } catch(Exception e){
+    // biblioteca não disponível — opera sem som
+    soundAvailable = false;
+    hoverSound = null;
+    clickSound = null;
+  }
 }
