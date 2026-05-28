@@ -9,18 +9,18 @@ void setup() {
   textFont(fonte);
   
   // Prisma
-  imgPrismaQuadrado = loadImage("C:/Users/guilh/OneDrive/Imagens/formas/PrismaQuadrado.png");
-  imgPrismaTriangular = loadImage("C:/Users/guilh/OneDrive/Imagens/formas/prismaTriangular.png");
-  imgPrismaHexagonal = loadImage("C:/Users/guilh/OneDrive/Imagens/formas/PrismaHexagonal.png");
+  imgPrismaQuadrado = loadImage("PrismaQuadrado.png");
+  imgPrismaTriangular = loadImage("prismaTriangular.png");
+  imgPrismaHexagonal = loadImage("PrismaHexagonal.png");
   
   // Piramide
-  imgPiramideQuadrada = loadImage("C:/Users/guilh/OneDrive/Imagens/formas/piramideQuadrada.png");
-  imgPiramideTriangular = loadImage("C:/Users/guilh/OneDrive/Imagens/formas/PiramideTriangular.png");
-  imgPiramideHexagonal = loadImage("C:/Users/guilh/OneDrive/Imagens/formas/piramideHexagonal.png");
+  imgPiramideQuadrada = loadImage("piramideQuadrada.png");
+  imgPiramideTriangular = loadImage("PiramideTriangular.png");
+  imgPiramideHexagonal = loadImage("piramideHexagonal.png");
   
   // Cone e esfera
-  imgCone3D = loadImage("C:/Users/guilh/OneDrive/Imagens/formas/Cone.png");
-  imgEsfera3D = loadImage("C:/Users/guilh/OneDrive/Imagens/formas/Esfera.png");
+  imgCone3D = loadImage("Cone.png");
+  imgEsfera3D = loadImage("Esfera.png");
   
   // Imagens do menu lateral 3D
   imgCubo3D = imgPrismaQuadrado;
