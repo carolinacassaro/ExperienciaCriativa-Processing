@@ -95,7 +95,7 @@ void fundoCanvas3d(){
 }
 
 void desenharFormaPrincipal3d(PImage imgForma, String legenda){
-  float imgX = canvaX + canvaW*1.3/13;
+  float imgX = canvaX + canvaW*0.8/13;
   float imgY = canvaY + canvaH*1.2/14;
   float imgW = canvaW*3.0/13;
   float imgH = canvaH*4.2/14;
