@@ -1,4 +1,5 @@
 void viewInicial(){
+  background(20, 75, 40);
   image(imgInicial, 0, 0, width, height);
   
  if(mousePressed){

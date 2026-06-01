@@ -10,7 +10,7 @@ void setup() {
   preview3d = createGraphics(400, 400, P3D);
   
   // Prisma
-  imgPrismaQuadrado = loadImage("PrismaQuadrado.png");
+  imgPrismaQuadrado = loadImage("prismaQuadrado.png");
   imgPrismaTriangular = loadImage("prismaTriangular.png");
   imgPrismaHexagonal = loadImage("PrismaHexagonal.png");
   
@@ -47,7 +47,7 @@ void draw(){
       if (svar == 32) view3d_2();
       if (svar == 33) view3d_3();
       if (svar == 34) view3d_4();
-    
+
     if (!deducao.isEmpty()){
       popUp();
     }

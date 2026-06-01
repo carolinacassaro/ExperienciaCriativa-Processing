@@ -4,6 +4,7 @@ void view2d(){
 }
 
 void view2d_1(){
+  background(255);
   menu2d();
   fill(light_green);
   rect(canvaX,canvaY,canvaW,canvaH);
@@ -52,6 +53,7 @@ void view2d_1(){
 }
 
 void view2d_2(){
+  background(255);
   menu2d();
   fill(light_green);
   rect(canvaX,canvaY,canvaW, canvaH);
@@ -94,6 +96,7 @@ void view2d_2(){
 }
 
 void view2d_3(){ // circulo
+  background(255);
   menu2d();
   fill(light_green);
   rect(canvaX,canvaY,canvaW, canvaH);
@@ -113,6 +116,7 @@ void view2d_3(){ // circulo
 }
 
 void view2d_4(){ // hexagono
+  background(255);
   menu2d();
   fill(light_green);
   rect(canvaX,canvaY,canvaW, canvaH);
@@ -130,6 +134,7 @@ void view2d_4(){ // hexagono
 }
 
 void view2d_5(){ // losango
+  background(255);
   menu2d();
   fill(light_green);
   rect(canvaX,canvaY,canvaW, canvaH);
@@ -150,6 +155,7 @@ void view2d_5(){ // losango
 }
 
 void view2d_6(){ // trapezio
+  background(255);
   menu2d();
   fill(light_green);
   rect(canvaX,canvaY,canvaW, canvaH);
@@ -289,6 +295,11 @@ void exibirResultados2d(float x, float y, float w, float h){
 
 // /////////////////////////////////////////////////////////////////////////////////
 void menu2d(){
+  // -- background do menu lateral --
+  noStroke();
+  fill(255);
+  rect(0, 0, btnWidth, height);
+
   // -- menu: --
   menu2opcoes = 6;
   // -----------------------

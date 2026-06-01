@@ -4,6 +4,7 @@ void view3d(){
 }
 
 void view3d_1(){
+  background(244, 246, 245);
   menu3d();
   fundoCanvas3d();
   titulo("AREA DA BASE", canvaX + canvaW*4.5/13, canvaH*1/14);
@@ -20,6 +21,7 @@ void view3d_1(){
 }
 
 void view3d_2(){
+  background(244, 246, 245);
   menu3d();
   fundoCanvas3d();
   titulo("AREA DA BASE", canvaX + canvaW*4.5/13, canvaH*1/14);
@@ -36,6 +38,7 @@ void view3d_2(){
 }
 
 void view3d_3(){
+  background(244, 246, 245);
   menu3d();
   fundoCanvas3d();
   titulo("VOLUME", canvaX + canvaW*4.5/13, canvaH*1/14);
@@ -49,6 +52,7 @@ void view3d_3(){
 }
 
 void view3d_4(){
+  background(244, 246, 245);
   menu3d();
   fundoCanvas3d();
   titulo("VOLUME", canvaX + canvaW*4.5/13, canvaH*1/14);
@@ -62,6 +66,10 @@ void view3d_4(){
 }
 
 void menu3d(){
+  noStroke();
+  fill(244, 246, 245);
+  rect(0, 0, btnWidth, height);
+
   menu3opcoes = 4;
   
   for(int i = 0; i < menu3opcoes; i++){
@@ -127,17 +135,27 @@ void desenharFormaPrincipal3d(PImage imgForma, String legenda){
   preview3d.beginDraw();
   preview3d.clear();
   preview3d.background(0, 0);
-  preview3d.noStroke();
-  preview3d.lights();
-  preview3d.ambientLight(120, 120, 120);
-  preview3d.directionalLight(255, 255, 255, -0.5, -1, -0.5);
-  preview3d.pointLight(255, 255, 255, preview3d.width*0.5, preview3d.height*0.2, 300);
-  preview3d.pushMatrix();
-  preview3d.translate(preview3d.width/2, preview3d.height/2 + 20, 0);
-  preview3d.rotateX(-PI/6);
-  preview3d.rotateY(angle3d);
-  desenharModelo3d(preview3d);
-  preview3d.popMatrix();
+
+  if(imgForma != null){
+    preview3d.imageMode(CENTER);
+    preview3d.pushMatrix();
+    preview3d.translate(preview3d.width/2, preview3d.height/2 + 20);
+    preview3d.image(imgForma, 0, 0, preview3d.width * 0.9, preview3d.height * 0.9);
+    preview3d.popMatrix();
+  } else {
+    preview3d.noStroke();
+    preview3d.lights();
+    preview3d.ambientLight(120, 120, 120);
+    preview3d.directionalLight(255, 255, 255, -0.5, -1, -0.5);
+    preview3d.pointLight(255, 255, 255, preview3d.width*0.5, preview3d.height*0.2, 300);
+    preview3d.pushMatrix();
+    preview3d.translate(preview3d.width/2, preview3d.height/2 + 20, 0);
+    preview3d.rotateX(-PI/6);
+    preview3d.rotateY(angle3d);
+    desenharModelo3d(preview3d);
+    preview3d.popMatrix();
+  }
+
   preview3d.endDraw();
   imageMode(CORNER);
   image(preview3d, imgX, imgY, imgW, imgH);
