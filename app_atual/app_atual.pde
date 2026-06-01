@@ -20,8 +20,8 @@ void setup() {
   imgPiramideHexagonal = loadImage("piramideHexagonal.png");
   
   // Cone e esfera
-  imgCone3D = loadImage("Cone.png");
-  imgEsfera3D = loadImage("Esfera.png");
+  imgCone3D = loadImage("cone.png");
+  imgEsfera3D = loadImage("esfera.png");
   
   // Imagens do menu lateral 3D
   imgCubo3D = imgPrismaQuadrado;
