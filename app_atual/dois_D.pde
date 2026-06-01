@@ -192,8 +192,12 @@ void painelValores2d(){
   float w = 170;
   float h = max(canvaH*4/14, 80 + fieldCount * 50);
   fill(255);
-  stroke(80);
-  strokeWeight(1.5);
+  if(deducao.isEmpty()){
+    stroke(80);
+    strokeWeight(1.5);
+  } else {
+    noStroke();
+  }
   rect(x, y, w, h, 24);
   fill(0);
   textSize(12);
@@ -239,8 +243,12 @@ void campoEntrada2d(String label, float x, float y, float w, float h, String val
   boolean over = estaSobre(x, y, w, h);
   boolean active = activeInput.equals(label);
   fill(active ? color(230, 240, 255) : over ? color(235, 245, 255) : color(250));
-  stroke(active ? color(90, 140, 255) : 160);
-  strokeWeight(active ? 2 : 1);
+  if(deducao.isEmpty()){
+    stroke(active ? color(90, 140, 255) : 160);
+    strokeWeight(active ? 2 : 1);
+  } else {
+    noStroke();
+  }
   rect(x, y, w, h, 12);
   fill(0);
   textSize(14);
@@ -257,8 +265,12 @@ void campoEntrada2d(String label, float x, float y, float w, float h, String val
 
 void exibirResultados2d(float x, float y, float w, float h){
   fill(245);
-  stroke(80);
-  strokeWeight(1.2);
+  if(deducao.isEmpty()){
+    stroke(80);
+    strokeWeight(1.2);
+  } else {
+    noStroke();
+  }
   rect(x, y, w, h, 20);
   fill(0);
   textSize(14);

@@ -100,9 +100,13 @@ void menu3d(){
 
 void desenharIconeMenu3d(PImage imgForma, float x, float y, float w, float h, String legenda){
   boolean over = estaSobre(x, y, w, h);
-  stroke(over ? color(90, 140, 255) : color(120));
-  strokeWeight(over ? 3 : 1.5);
   fill(255);
+  if(deducao.isEmpty()){
+    stroke(over ? color(90, 140, 255) : color(120));
+    strokeWeight(over ? 3 : 1.5);
+  } else {
+    noStroke();
+  }
   rect(x - 6, y - 6, w + 12, h + 12, 20);
   if(imgForma != null){
     image(imgForma, x, y, w, h);
@@ -511,8 +515,12 @@ void campoEntrada3d(String label, float x, float y, float w, float h, String val
   boolean over = estaSobre(x, y, w, h);
   boolean active = activeInput.equals(label);
   fill(active ? color(230, 240, 255) : over ? color(235, 245, 255) : color(250));
-  stroke(active ? color(90, 140, 255) : 160);
-  strokeWeight(active ? 2 : 1);
+  if(deducao.isEmpty()){
+    stroke(active ? color(90, 140, 255) : 160);
+    strokeWeight(active ? 2 : 1);
+  } else {
+    noStroke();
+  }
   rect(x, y, w, h, 12);
   fill(0);
   textSize(14);
@@ -529,8 +537,12 @@ void campoEntrada3d(String label, float x, float y, float w, float h, String val
 
 void exibirResultados3d(float x, float y, float w, float h){
   fill(245);
-  stroke(80);
-  strokeWeight(1.2);
+  if(deducao.isEmpty()){
+    stroke(80);
+    strokeWeight(1.2);
+  } else {
+    noStroke();
+  }
   rect(x, y, w, h, 20);
   fill(0);
   textSize(14);

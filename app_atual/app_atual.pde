@@ -34,6 +34,9 @@ void setup() {
 }
 
 void draw(){
+    if(!deducao.isEmpty()){
+      noStroke();
+    }
     if (svar == 1) viewInicial();
     if (svar == 2) view2d();
       if (svar == 21) view2d_1(); 

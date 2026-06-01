@@ -69,8 +69,12 @@ void button(int order){
   float y = order * btnHeight;
   boolean over = estaSobre(x, y, btnWidth, btnHeight);
   fill(over ? color(220, 235, 255) : backgroundButton);
-  stroke(80);
-  strokeWeight(1);
+  if(deducao.isEmpty()){
+    stroke(80);
+    strokeWeight(1);
+  } else {
+    noStroke();
+  }
   rect(x, y, btnWidth, btnHeight, 20);
 }
 
@@ -79,8 +83,12 @@ void buttonBack(int redirection){
   float y = height - btnHeight;
   boolean over = estaSobre(x, y, btnWidth, btnHeight);
   fill(over ? color(220, 235, 255) : backgroundButton);
-  stroke(80);
-  strokeWeight(1);
+  if(deducao.isEmpty()){
+    stroke(80);
+    strokeWeight(1);
+  } else {
+    noStroke();
+  }
   rect(x, y, btnWidth, btnHeight, 20);
   fill(0);
   textSize(64);
@@ -105,8 +113,12 @@ void titulo(String texto, float x, float y){
   float tituloW = canvaW*7/13;
   float tituloH = canvaH*0.5/14;
   fill(255);
-  stroke(120);
-  strokeWeight(1.5);
+  if(deducao.isEmpty()){
+    stroke(120);
+    strokeWeight(1.5);
+  } else {
+    noStroke();
+  }
   rect(tituloX, tituloY, tituloW, tituloH, 28);
   fill(50);
   textSize(12);
@@ -117,8 +129,12 @@ void titulo(String texto, float x, float y){
 void card(String conteudo, String formula, float x, float y, float w, float h){
   boolean over = estaSobre(x, y, w, h);
   fill(over ? color(255, 250, 210) : 255);
-  stroke(80);
-  strokeWeight(1.5);
+  if(deducao.isEmpty()){
+    stroke(80);
+    strokeWeight(1.5);
+  } else {
+    noStroke();
+  }
   rect(x, y, w, h, 24);
   fill(0);
   textSize(20);
@@ -138,8 +154,12 @@ void rotulo(String texto, float x, float y, float w, float h){
   boolean over = estaSobre(x, y, w, h);
   boolean active = texto.equals(rotulo);
   fill(active ? color(230, 255, 230) : over ? color(235,245,255) : 255);
-  stroke(80);
-  strokeWeight(1);
+  if(deducao.isEmpty()){
+    stroke(80);
+    strokeWeight(1);
+  } else {
+    noStroke();
+  }
   rect(x, y, w, h, 14);
   fill(0);
   textAlign(CENTER, CENTER);
@@ -156,37 +176,14 @@ void rotulo(String texto, float x, float y, float w, float h){
 }
 
 void popUp(){
-  fill(0, 120);
-  noStroke();
-  rect(0, 0, width, height);
-  // preserve left menu, clear the rest of the screen
-  float x = canvaX + canvaW*0.5/13;
-  float y = canvaY + canvaH*0.5/14;
-  float w = canvaW*12/13;
-  float h = canvaH*13/14;
-
-  // erase everything except the left menu area using the current view background
-  noStroke();
-  int bgc;
-  if(svar == 1){
-    bgc = color(20, 75, 40); // initial screen background
-  } else if(svar == 2 || (svar >= 21 && svar <= 26)){
-    bgc = color(255); // 2D views use white
-  } else {
-    bgc = color(244, 246, 245); // 3D views light gray
-  }
-  fill(bgc);
-  rect(btnWidth, 0, width - btnWidth, height);
-  // pinta interior opaco (ligeiramente maior) para esconder elementos por trás
   noStroke();
   fill(255);
-  rect(x - 2, y - 2, w + 4, h + 4, 30);
+  rect(0, 0, width, height);
 
-  // desenha apenas a borda por cima
-  stroke(80);
-  strokeWeight(2);
-  noFill();
-  rect(x, y, w, h, 30);
+  float x = width * 0.1;
+  float y = height * 0.1;
+  float w = width * 0.8;
+  float h = height * 0.8;
 
   float closeX = x + w - 50;
   float closeY = y + 20;
@@ -195,7 +192,7 @@ void popUp(){
   boolean closeHover = estaSobre(closeX, closeY, closeW, closeH);
   fill(closeHover ? color(255, 120, 120) : color(255, 80, 80));
   noStroke();
-  rect(closeX, closeY, closeW, closeH, 10);
+  rect(closeX, closeY, closeW, closeH);
   fill(255);
   textSize(20);
   textAlign(CENTER, CENTER);
