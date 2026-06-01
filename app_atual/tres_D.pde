@@ -124,16 +124,256 @@ void desenharFormaPrincipal3d(PImage imgForma, String legenda){
   float imgW = canvaW*3.5/13;
   float imgH = canvaH*5.0/14;
   
-  if(imgForma != null){
-    image(imgForma, imgX, imgY, imgW, imgH);
-  } else {
-    fill(255);
-    rect(imgX, imgY, imgW, imgH, 20);
-    fill(0);
-    textSize(24);
-    textAlign(CENTER, CENTER);
-    text(legenda, imgX + imgW/2, imgY + imgH/2);
+  preview3d.beginDraw();
+  preview3d.clear();
+  preview3d.background(0, 0);
+  preview3d.noStroke();
+  preview3d.lights();
+  preview3d.ambientLight(120, 120, 120);
+  preview3d.directionalLight(255, 255, 255, -0.5, -1, -0.5);
+  preview3d.pointLight(255, 255, 255, preview3d.width*0.5, preview3d.height*0.2, 300);
+  preview3d.pushMatrix();
+  preview3d.translate(preview3d.width/2, preview3d.height/2 + 20, 0);
+  preview3d.rotateX(-PI/6);
+  preview3d.rotateY(angle3d);
+  desenharModelo3d(preview3d);
+  preview3d.popMatrix();
+  preview3d.endDraw();
+  imageMode(CORNER);
+  image(preview3d, imgX, imgY, imgW, imgH);
+}
+
+void desenharModelo3d(PGraphics pg){
+  pg.pushMatrix();
+  float s = 120;
+  if(svar == 31){
+    if(rotulo3d.equals("Base Quadrada")) desenharPrismaQuadrado(pg, s);
+    else if(rotulo3d.equals("Base Triangular")) desenharPrismaTriangular(pg, s);
+    else desenharPrismaHexagonal(pg, s);
+  } else if(svar == 32){
+    if(rotulo3d.equals("Base Quadrada")) desenharPiramideQuadrada(pg, s);
+    else if(rotulo3d.equals("Base Triangular")) desenharPiramideTriangular(pg, s);
+    else desenharPiramideHexagonal(pg, s);
+  } else if(svar == 33){
+    desenharCone(pg, s*0.7, s*1.3);
+  } else if(svar == 34){
+    desenharEsfera(pg, s*0.8);
   }
+  pg.popMatrix();
+}
+
+void desenharPrismaQuadrado(PGraphics pg, float s){
+  pg.pushMatrix();
+  pg.fill(165, 200, 245);
+  pg.stroke(80);
+  pg.strokeWeight(1.5);
+  pg.box(s, s*0.6, s);
+  pg.popMatrix();
+}
+
+void desenharPrismaTriangular(PGraphics pg, float s){
+  float h = s*0.6;
+  float d = s*0.8;
+  float half = s*0.5;
+
+  PVector a1 = new PVector(-half, h/2, -d/2);
+  PVector b1 = new PVector(half, h/2, -d/2);
+  PVector c1 = new PVector(0, -h/2, -d/2);
+  PVector a2 = new PVector(-half, h/2, d/2);
+  PVector b2 = new PVector(half, h/2, d/2);
+  PVector c2 = new PVector(0, -h/2, d/2);
+
+  pg.pushMatrix();
+  pg.fill(220, 180, 170);
+  pg.stroke(80);
+  pg.strokeWeight(1.5);
+  pg.beginShape(TRIANGLES);
+  pg.vertex(a1.x, a1.y, a1.z);
+  pg.vertex(b1.x, b1.y, b1.z);
+  pg.vertex(c1.x, c1.y, c1.z);
+  pg.vertex(a2.x, a2.y, a2.z);
+  pg.vertex(c2.x, c2.y, c2.z);
+  pg.vertex(b2.x, b2.y, b2.z);
+  pg.endShape();
+
+  pg.beginShape(QUADS);
+  pg.vertex(a1.x, a1.y, a1.z);
+  pg.vertex(b1.x, b1.y, b1.z);
+  pg.vertex(b2.x, b2.y, b2.z);
+  pg.vertex(a2.x, a2.y, a2.z);
+  pg.vertex(b1.x, b1.y, b1.z);
+  pg.vertex(c1.x, c1.y, c1.z);
+  pg.vertex(c2.x, c2.y, c2.z);
+  pg.vertex(b2.x, b2.y, b2.z);
+  pg.vertex(c1.x, c1.y, c1.z);
+  pg.vertex(a1.x, a1.y, a1.z);
+  pg.vertex(a2.x, a2.y, a2.z);
+  pg.vertex(c2.x, c2.y, c2.z);
+  pg.endShape();
+  pg.popMatrix();
+}
+
+void desenharPrismaHexagonal(PGraphics pg, float s){
+  float r = s*0.35;
+  float h = s*0.6;
+  float d = s*0.8;
+  PVector[] top = new PVector[6];
+  PVector[] bot = new PVector[6];
+  for(int i = 0; i < 6; i++){
+    float ang = TWO_PI * i / 6;
+    top[i] = new PVector(cos(ang)*r, -h/2, -d/2);
+    bot[i] = new PVector(cos(ang)*r, -h/2, d/2);
+  }
+
+  pg.pushMatrix();
+  pg.fill(190, 215, 180);
+  pg.stroke(80);
+  pg.strokeWeight(1.5);
+  pg.beginShape(QUADS);
+  for(int i = 0; i < 6; i++){
+    int j = (i + 1) % 6;
+    pg.vertex(top[i].x, top[i].y, top[i].z);
+    pg.vertex(top[j].x, top[j].y, top[j].z);
+    pg.vertex(bot[j].x, bot[j].y, bot[j].z);
+    pg.vertex(bot[i].x, bot[i].y, bot[i].z);
+  }
+  pg.endShape();
+
+  pg.beginShape(TRIANGLES);
+  for(int i = 1; i < 5; i++){
+    pg.vertex(top[0].x, top[0].y, top[0].z);
+    pg.vertex(top[i].x, top[i].y, top[i].z);
+    pg.vertex(top[i+1].x, top[i+1].y, top[i+1].z);
+  }
+  pg.endShape();
+
+  pg.beginShape(TRIANGLES);
+  for(int i = 1; i < 5; i++){
+    pg.vertex(bot[0].x, bot[0].y, bot[0].z);
+    pg.vertex(bot[i+1].x, bot[i+1].y, bot[i+1].z);
+    pg.vertex(bot[i].x, bot[i].y, bot[i].z);
+  }
+  pg.endShape();
+  pg.popMatrix();
+}
+
+void desenharPiramideQuadrada(PGraphics pg, float s){
+  float h = s*0.8;
+  float half = s*0.4;
+  PVector a = new PVector(-half, h/2, -half);
+  PVector b = new PVector(half, h/2, -half);
+  PVector c = new PVector(half, h/2, half);
+  PVector d = new PVector(-half, h/2, half);
+  PVector apex = new PVector(0, -h/2, 0);
+
+  pg.pushMatrix();
+  pg.fill(220, 180, 220);
+  pg.stroke(80);
+  pg.strokeWeight(1.5);
+  pg.beginShape(TRIANGLES);
+  pg.vertex(a.x, a.y, a.z); pg.vertex(b.x, b.y, b.z); pg.vertex(apex.x, apex.y, apex.z);
+  pg.vertex(b.x, b.y, b.z); pg.vertex(c.x, c.y, c.z); pg.vertex(apex.x, apex.y, apex.z);
+  pg.vertex(c.x, c.y, c.z); pg.vertex(d.x, d.y, d.z); pg.vertex(apex.x, apex.y, apex.z);
+  pg.vertex(d.x, d.y, d.z); pg.vertex(a.x, a.y, a.z); pg.vertex(apex.x, apex.y, apex.z);
+  pg.endShape();
+  pg.beginShape(QUADS);
+  pg.vertex(a.x, a.y, a.z); pg.vertex(b.x, b.y, b.z);
+  pg.vertex(c.x, c.y, c.z); pg.vertex(d.x, d.y, d.z);
+  pg.endShape();
+  pg.popMatrix();
+}
+
+void desenharPiramideTriangular(PGraphics pg, float s){
+  float h = s*0.8;
+  float half = s*0.5;
+  PVector a = new PVector(-half, h/2, -half*0.6);
+  PVector b = new PVector(half, h/2, -half*0.6);
+  PVector c = new PVector(0, h/2, half*0.8);
+  PVector apex = new PVector(0, -h/2, 0);
+
+  pg.pushMatrix();
+  pg.fill(200, 170, 220);
+  pg.stroke(80);
+  pg.strokeWeight(1.5);
+  pg.beginShape(TRIANGLES);
+  pg.vertex(a.x, a.y, a.z); pg.vertex(b.x, b.y, b.z); pg.vertex(c.x, c.y, c.z);
+  pg.vertex(a.x, a.y, a.z); pg.vertex(b.x, b.y, b.z); pg.vertex(apex.x, apex.y, apex.z);
+  pg.vertex(b.x, b.y, b.z); pg.vertex(c.x, c.y, c.z); pg.vertex(apex.x, apex.y, apex.z);
+  pg.vertex(c.x, c.y, c.z); pg.vertex(a.x, a.y, a.z); pg.vertex(apex.x, apex.y, apex.z);
+  pg.endShape();
+  pg.popMatrix();
+}
+
+void desenharPiramideHexagonal(PGraphics pg, float s){
+  float r = s*0.3;
+  float h = s*0.9;
+  PVector[] base = new PVector[6];
+  for(int i = 0; i < 6; i++){
+    float ang = TWO_PI * i / 6;
+    base[i] = new PVector(cos(ang)*r, h/2, sin(ang)*r);
+  }
+  PVector apex = new PVector(0, -h/2, 0);
+
+  pg.pushMatrix();
+  pg.fill(185, 220, 220);
+  pg.stroke(80);
+  pg.strokeWeight(1.5);
+  pg.beginShape(TRIANGLES);
+  for(int i = 0; i < 6; i++){
+    int j = (i + 1) % 6;
+    pg.vertex(base[i].x, base[i].y, base[i].z);
+    pg.vertex(base[j].x, base[j].y, base[j].z);
+    pg.vertex(apex.x, apex.y, apex.z);
+  }
+  pg.endShape();
+
+  pg.beginShape();
+  for(int i = 0; i < 6; i++){
+    pg.vertex(base[i].x, base[i].y, base[i].z);
+  }
+  pg.endShape(CLOSE);
+  pg.popMatrix();
+}
+
+void desenharCone(PGraphics pg, float r, float h){
+  pg.pushMatrix();
+  pg.fill(220, 200, 160);
+  pg.stroke(80);
+  pg.strokeWeight(1.5);
+
+  int sides = 36;
+  float halfHeight = h * 0.5;
+  PVector apex = new PVector(0, -halfHeight, 0);
+  PVector[] base = new PVector[sides];
+  for(int i = 0; i < sides; i++){
+    float ang = TWO_PI * i / sides;
+    base[i] = new PVector(cos(ang) * r, halfHeight, sin(ang) * r);
+  }
+
+  pg.beginShape(TRIANGLES);
+  for(int i = 0; i < sides; i++){
+    int j = (i + 1) % sides;
+    pg.vertex(base[i].x, base[i].y, base[i].z);
+    pg.vertex(base[j].x, base[j].y, base[j].z);
+    pg.vertex(apex.x, apex.y, apex.z);
+  }
+  pg.endShape();
+
+  pg.beginShape();
+  for(int i = 0; i < sides; i++){
+    pg.vertex(base[i].x, base[i].y, base[i].z);
+  }
+  pg.endShape(CLOSE);
+  pg.popMatrix();
+}
+
+void desenharEsfera(PGraphics pg, float r){
+  pg.pushMatrix();
+  pg.fill(200, 220, 240);
+  pg.stroke(80);
+  pg.strokeWeight(1.5);
+  pg.sphere(r);
+  pg.popMatrix();
 }
 
 void botoesVariacaoPrisma(){
