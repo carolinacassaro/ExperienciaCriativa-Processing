@@ -60,3 +60,5 @@ int menu3opcoes;
 String rotulo3d = "Base Quadrada";
 
 // ------------------------
+// Detector de clique único (evita auto-clique ao segurar o mouse)
+boolean clickDetectado = false;

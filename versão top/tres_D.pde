@@ -363,6 +363,10 @@ void keyPressed(){
       if(activeInput.equals("P")) valorP = valorP.length() > 0 ? valorP.substring(0, valorP.length()-1) : "";
       if(activeInput.equals("a")) valorA = valorA.length() > 0 ? valorA.substring(0, valorA.length()-1) : "";
       if(activeInput.equals("r")) valorR = valorR.length() > 0 ? valorR.substring(0, valorR.length()-1) : "";
+      // aliases: labels visuais diferentes que mapeiam para as mesmas variaveis
+      if(activeInput.equals("D")) valorP = valorP.length() > 0 ? valorP.substring(0, valorP.length()-1) : "";
+      if(activeInput.equals("d")) valorA = valorA.length() > 0 ? valorA.substring(0, valorA.length()-1) : "";
+      if(activeInput.equals("B")) valorP = valorP.length() > 0 ? valorP.substring(0, valorP.length()-1) : "";
     } else if(key == ENTER || key == RETURN){
       activeInput = "";
     } else if((key >= '0' && key <= '9') || key == '.'){
@@ -373,6 +377,10 @@ void keyPressed(){
       if(activeInput.equals("P")) atual = valorP;
       if(activeInput.equals("a")) atual = valorA;
       if(activeInput.equals("r")) atual = valorR;
+      // aliases: leitura
+      if(activeInput.equals("D")) atual = valorP;
+      if(activeInput.equals("d")) atual = valorA;
+      if(activeInput.equals("B")) atual = valorP;
       
       if(key == '.' && atual.contains(".")) return;
       
@@ -383,6 +391,10 @@ void keyPressed(){
       if(activeInput.equals("P")) valorP = atual;
       if(activeInput.equals("a")) valorA = atual;
       if(activeInput.equals("r")) valorR = atual;
+      // aliases: escrita
+      if(activeInput.equals("D")) valorP = atual;
+      if(activeInput.equals("d")) valorA = atual;
+      if(activeInput.equals("B")) valorP = atual;
     }
   }
 }

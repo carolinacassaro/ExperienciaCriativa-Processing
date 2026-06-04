@@ -33,33 +33,44 @@ void setup() {
 }
 
 void draw(){
-    if(!deducao.isEmpty()){
-      noStroke();
-    }
-    if (svar == 1) viewInicial();
-    if (svar == 2) view2d();
-      if (svar == 21) view2d_1(); 
-      if (svar == 22) view2d_2(); 
-      if (svar == 23) view2d_3(); 
-      if (svar == 24) view2d_4();
-      if (svar == 25) view2d_5(); 
-      if (svar == 26) view2d_6(); 
-    if (svar == 3) view3d();
-      if (svar == 31) view3d_1();
-      if (svar == 32) view3d_2();
-      if (svar == 33) view3d_3();
-      if (svar == 34) view3d_4();
+  if(!deducao.isEmpty()){
+    noStroke();
+  }
+  if (svar == 1) viewInicial();
+  if (svar == 2) view2d();
+    if (svar == 21) view2d_1();
+    if (svar == 22) view2d_2();
+    if (svar == 23) view2d_3();
+    if (svar == 24) view2d_4();
+    if (svar == 25) view2d_5();
+    if (svar == 26) view2d_6();
+  if (svar == 3) view3d();
+    if (svar == 31) view3d_1();
+    if (svar == 32) view3d_2();
+    if (svar == 33) view3d_3();
+    if (svar == 34) view3d_4();
+  // Questionário
+  if (svar == 4) viewQuestionarioMenu();
+  if (svar == 5) viewQuestionario();
+  if (svar == 6) viewResultados();
 
-    if (!deducao.isEmpty()){
-      popUp();
-    }
+  if(!deducao.isEmpty()){
+    popUp();
+  }
+  
+  // reset do clique único — deve ser o último comando do draw
+  clickDetectado = false;
+}
+
+// captura um único clique por pressionamento do mouse
+void mousePressed(){
+  clickDetectado = true;
 }
 
 // Inicializa objetos de som via reflexão para manter compatibilidade
 void initSound(){
   try{
     Class<?> sinClass = Class.forName("processing.sound.SinOsc");
-    // marca que som está disponível
     soundAvailable = true;
     java.lang.reflect.Constructor<?> ctor = sinClass.getConstructor(Object.class);
     hoverSound = ctor.newInstance(this);
@@ -72,7 +83,6 @@ void initSound(){
     soundSetAmp(clickSound, 0);
     soundPlay(clickSound);
   } catch(Exception e){
-    // biblioteca não disponível — opera sem som
     soundAvailable = false;
     hoverSound = null;
     clickSound = null;
