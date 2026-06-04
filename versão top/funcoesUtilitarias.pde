@@ -53,15 +53,7 @@ void soundSetFreq(Object osc, float f){
 // Fade amplitude from startAmp -> endAmp over durationMs (non-blocking)
 void soundFade(Object osc, float startAmp, float endAmp, int durationMs){
   if(osc == null || !soundAvailable) return;
-  new Thread(new Runnable(){ public void run(){
-    int steps = max(1, durationMs/16);
-    for(int i = 0; i <= steps; i++){
-      float t = i / (float) steps;
-      float val = lerp(startAmp, endAmp, t);
-      soundSetAmp(osc, val);
-      try{ Thread.sleep(durationMs / steps); } catch(Exception e){}
-    }
-  }}).start();
+  soundSetAmp(osc, endAmp); // simplificado para evitar erro de concorrência da thread
 }
 
 void button(int order){
@@ -103,6 +95,7 @@ void buttonBack(int redirection){
     } else {
       // Senão, voltar ao redirecionamento
       svar = redirection;
+      limparValores();
     }
   }
 }
@@ -170,52 +163,72 @@ void rotulo(String texto, float x, float y, float w, float h){
     if(over){
       tocarClick();
       rotulo = texto;
-      activeInput = ""; // limpa input quando muda rótulo
+      limparValores();
     }
   }
 }
 
 void popUp(){
+  // Menu lateral em branco (esconde os botões de forma)
   noStroke();
   fill(255);
-  rect(0, 0, width, height);
+  rect(0, 0, btnWidth, height);
+  
+  // Botão de voltar (aproveitando o padrão)
+  buttonBack(0);
 
-  float x = width * 0.1;
-  float y = height * 0.1;
-  float w = width * 0.8;
-  float h = height * 0.8;
+  // Fundo principal com as listras
+  fundoCanvas();
 
-  float closeX = x + w - 50;
-  float closeY = y + 20;
-  float closeW = 30;
-  float closeH = 30;
-  boolean closeHover = estaSobre(closeX, closeY, closeW, closeH);
-  fill(closeHover ? color(255, 120, 120) : color(255, 80, 80));
-  noStroke();
-  rect(closeX, closeY, closeW, closeH);
-  fill(255);
-  textSize(20);
-  textAlign(CENTER, CENTER);
-  text("X", closeX + closeW/2, closeY + closeH/2);
-
-  if(mousePressed && closeHover){
-    tocarClick();
-    deducao = "";
-  }
-
+  // Texto da dedução
   fill(0);
   textAlign(LEFT, TOP);
   textSize(22);
-  text(deducao, x + 30, y + 30, w - 60, h - 100);
-
-  fill(120);
-  textSize(14);
-  textAlign(RIGHT, BOTTOM);
-  text("Pressione ESPAÇO ou clique em X para fechar", x + w - 30, y + h - 20);
+  text(deducao, canvaX + 60, canvaY + 60, canvaW - 120, canvaH - 120);
 
   if(keyPressed){
     if(key == ' '){
       deducao = "";
     }
   }
+}
+
+void limparValores() {
+  valorL = "";
+  valorB = "";
+  valorH = "";
+  valorP = "";
+  valorA = "";
+  valorR = "";
+  activeInput = "";
+}
+
+void fundoCanvas(){
+  fill(light_green);
+  rect(canvaX, canvaY, canvaW, canvaH);
+  noStroke();
+  fill(255, 30);
+  for(int i = 0; i < 8; i++){
+    rect(canvaX + 10, canvaY + i * canvaH/8, canvaW - 20, canvaH/20, 18);
+  }
+}
+
+String deducaoTriangulo() {
+  return "Deducao da area do Triangulo:\n\n1. Imagine um retangulo de base (b) e altura (h).\n2. A area desse retangulo e (b x h).\n3. Ao cortar esse retangulo com uma diagonal, formam-se dois triangulos iguais.\n4. Portanto, a area de um unico triangulo e a metade do retangulo original:\n\nA = (b x h) / 2";
+}
+
+String deducaoRetangulo() {
+  return "Deducao da area do Retangulo / Quadrado:\n\n1. O retangulo e uma figura de lados ortogonais.\n2. Imagine dividi-lo em pequenos quadrados de 1x1.\n3. O numero total de quadrados que cabem dentro dele e obtido multiplicando o tamanho da base (b) pelo tamanho da altura (h).\n\nA = b x h";
+}
+
+String deducaoHexagono() {
+  return "Deducao da area do Hexagono Regular:\n\n1. Um hexagono regular pode ser dividido a partir do seu centro em exatos 6 triangulos equilateros idênticos.\n2. A area de cada triangulo e (a^2 x raiz(3)) / 4.\n3. Multiplicando essa area por 6, chegamos a formula geral do hexagono.\n\nA = 3 x a^2 x raiz(3) / 2";
+}
+
+String deducaoLosango() {
+  return "Deducao da area do Losango:\n\n1. O losango e delimitado por uma diagonal maior (D) e uma menor (d).\n2. Imagine circunscrever um retangulo em volta do losango. As medidas do retangulo seriam D e d.\n3. A area desse retangulo seria D x d. O losango ocupa exatamente metade desse retangulo.\n\nA = (D x d) / 2";
+}
+
+String deducaoTrapezio() {
+  return "Deducao da area do Trapezio:\n\n1. Pegue um trapezio de base maior (B), base menor (b) e altura (h).\n2. Se voce colar um segundo trapezio invertido e identico ao lado do primeiro, eles formarao um paralelogramo de base total (B+b) e altura h.\n3. A area desse paralelogramo e (B+b) x h. Como usamos dois trapezios, a area de um so e a metade disso.\n\nA = (B+b) x h / 2";
 }

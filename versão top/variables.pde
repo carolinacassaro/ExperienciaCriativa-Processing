@@ -13,7 +13,6 @@ int canvaY = 0;
 // ------------------------
 
 // Pag.Inicial - imagens
-PGraphics preview3d;
 PImage imgInicial;
 PImage imgBotao;
 PImage imgCubo3D;
@@ -59,8 +58,5 @@ String rotulo = "Equilátero";
 // Pag.3D - variables
 int menu3opcoes;
 String rotulo3d = "Base Quadrada";
-// rotation for 3D preview
-float angle3d = 0.0;
-float rotSpeed3d = 0.03;
 
 // ------------------------

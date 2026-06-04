@@ -1,5 +1,5 @@
 void settings(){
-  size(width, height, P3D);
+  size(width, height);
 }
 
 void setup() {
@@ -7,10 +7,9 @@ void setup() {
   imgBotao = loadImage("botaoInicial.png");
   fonte = createFont("Arial", 64, true);
   textFont(fonte);
-  preview3d = createGraphics(400, 400, P3D);
   
   // Prisma
-  imgPrismaQuadrado = loadImage("prismaQuadrado.png");
+  imgPrismaQuadrado = loadImage("PrismaQuadrado.png");
   imgPrismaTriangular = loadImage("prismaTriangular.png");
   imgPrismaHexagonal = loadImage("PrismaHexagonal.png");
   
@@ -53,11 +52,6 @@ void draw(){
 
     if (!deducao.isEmpty()){
       popUp();
-    }
-
-    // animate 3D preview rotation when viewing 3D pages
-    if(svar >= 31 && svar <= 34){
-      angle3d += rotSpeed3d;
     }
 }
 
