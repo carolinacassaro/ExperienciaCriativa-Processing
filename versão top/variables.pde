@@ -62,3 +62,7 @@ String rotulo3d = "Base Quadrada";
 // ------------------------
 // Detector de clique único (evita auto-clique ao segurar o mouse)
 boolean clickDetectado = false;
+
+// Rotação das figuras 3D
+float anguloRotacao3d = 0;
+PGraphics canvas3d;

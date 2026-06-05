@@ -126,19 +126,45 @@ void desenharFormaPrincipal3d(PImage imgForma, String legenda){
   float imgY = canvaY + canvaH*2.2/14;
   float imgW = canvaW*3.5/13;
   float imgH = canvaH*5.0/14;
-  
-  if(imgForma != null){
-    image(imgForma, imgX, imgY, imgW, imgH);
-  } else {
-    fill(255);
-    rect(imgX, imgY, imgW, imgH, 20);
-    fill(0);
-    textSize(24);
-    textAlign(CENTER, CENTER);
-    text(legenda, imgX + imgW/2, imgY + imgH/2);
+
+  // -- atualiza angulo de rotacao --
+  anguloRotacao3d += 0.008;
+
+  // -- renderiza forma 3D no canvas auxiliar (P3D isolado) --
+  canvas3d.beginDraw();
+  canvas3d.background(light_green);
+  canvas3d.noStroke();
+  canvas3d.lights();
+  canvas3d.pushMatrix();
+  canvas3d.translate(canvas3d.width/2.0, canvas3d.height/2.0, 0);
+  canvas3d.rotateX(anguloRotacao3d * 0.35);
+  canvas3d.rotateY(anguloRotacao3d);
+  canvas3d.fill(210, 212, 220);
+
+  if(svar == 31){ // Prisma
+    if(rotulo3d.equals("Base Quadrada"))        canvas3d.box(120, 170, 120);
+    else if(rotulo3d.equals("Base Triangular")) desenhar3dPrismaPoligonal(3, 95, 170);
+    else if(rotulo3d.equals("Base Hexagonal"))  desenhar3dPrismaPoligonal(6, 80, 170);
   }
-  // TODO: Espaço para implementação do motor e modelos P3D
+  else if(svar == 32){ // Piramide
+    if(rotulo3d.equals("Base Quadrada"))        desenhar3dPiramideQuadrada(140, 190);
+    else if(rotulo3d.equals("Base Triangular")) desenhar3dPiramidePoligonal(3, 95, 190);
+    else if(rotulo3d.equals("Base Hexagonal"))  desenhar3dPiramidePoligonal(6, 80, 190);
+  }
+  else if(svar == 33){ // Cone
+    desenhar3dCone(90, 190);
+  }
+  else if(svar == 34){ // Esfera
+    canvas3d.sphere(110);
+  }
+
+  canvas3d.popMatrix();
+  canvas3d.endDraw();
+
+  // -- exibe o canvas 3D na posicao da figura --
+  image(canvas3d, imgX, imgY, imgW, imgH);
 }
+
 
 void botoesVariacaoPrisma(){
   float clX = canvaX + 30;
@@ -520,4 +546,108 @@ void tituloCurto(String texto, float x, float y, float w){
   textSize(10);
   textAlign(CENTER, CENTER);
   text(texto, x + w/2, y + tituloH/2);
+}
+
+// ── AUXILIARES DE FORMA 3D ─────────────────────────────
+
+// Prisma com base poligonal de n lados
+void desenhar3dPrismaPoligonal(int n, float r, float h){
+  float hh = h/2;
+
+  // faces laterais
+  canvas3d.beginShape(QUAD_STRIP);
+  for(int i = 0; i <= n; i++){
+    float ang = TWO_PI * i / n;
+    canvas3d.vertex(r * cos(ang), -hh, r * sin(ang));
+    canvas3d.vertex(r * cos(ang),  hh, r * sin(ang));
+  }
+  canvas3d.endShape();
+
+  // tampa superior
+  canvas3d.beginShape(TRIANGLE_FAN);
+  canvas3d.vertex(0, -hh, 0);
+  for(int i = 0; i <= n; i++){
+    float ang = TWO_PI * i / n;
+    canvas3d.vertex(r * cos(ang), -hh, r * sin(ang));
+  }
+  canvas3d.endShape();
+
+  // tampa inferior
+  canvas3d.beginShape(TRIANGLE_FAN);
+  canvas3d.vertex(0, hh, 0);
+  for(int i = n; i >= 0; i--){
+    float ang = TWO_PI * i / n;
+    canvas3d.vertex(r * cos(ang), hh, r * sin(ang));
+  }
+  canvas3d.endShape();
+}
+
+// Piramide de base quadrada
+void desenhar3dPiramideQuadrada(float w, float h){
+  float hw   = w/2;
+  float base =  h/2;
+  float topo = -h/2;
+
+  // quatro faces triangulares
+  canvas3d.beginShape(TRIANGLES);
+  canvas3d.vertex(0,topo,0); canvas3d.vertex(-hw,base,-hw); canvas3d.vertex( hw,base,-hw);
+  canvas3d.vertex(0,topo,0); canvas3d.vertex( hw,base,-hw); canvas3d.vertex( hw,base, hw);
+  canvas3d.vertex(0,topo,0); canvas3d.vertex( hw,base, hw); canvas3d.vertex(-hw,base, hw);
+  canvas3d.vertex(0,topo,0); canvas3d.vertex(-hw,base, hw); canvas3d.vertex(-hw,base,-hw);
+  canvas3d.endShape();
+
+  // base quadrada
+  canvas3d.beginShape(QUADS);
+  canvas3d.vertex(-hw,base,-hw);
+  canvas3d.vertex( hw,base,-hw);
+  canvas3d.vertex( hw,base, hw);
+  canvas3d.vertex(-hw,base, hw);
+  canvas3d.endShape();
+}
+
+// Piramide com base poligonal de n lados
+void desenhar3dPiramidePoligonal(int n, float r, float h){
+  float hh = h/2;
+
+  // faces triangulares laterais
+  canvas3d.beginShape(TRIANGLE_FAN);
+  canvas3d.vertex(0, -hh, 0); // apice
+  for(int i = 0; i <= n; i++){
+    float ang = TWO_PI * i / n;
+    canvas3d.vertex(r * cos(ang), hh, r * sin(ang));
+  }
+  canvas3d.endShape();
+
+  // base poligonal
+  canvas3d.beginShape(TRIANGLE_FAN);
+  canvas3d.vertex(0, hh, 0);
+  for(int i = n; i >= 0; i--){
+    float ang = TWO_PI * i / n;
+    canvas3d.vertex(r * cos(ang), hh, r * sin(ang));
+  }
+  canvas3d.endShape();
+}
+
+// Cone
+void desenhar3dCone(float r, float h){
+  int   lados = 32;
+  float hh    = h/2;
+
+  // face lateral
+  canvas3d.beginShape(TRIANGLE_FAN);
+  canvas3d.vertex(0, -hh, 0); // apice
+  for(int i = 0; i <= lados; i++){
+    float ang = TWO_PI * i / lados;
+    canvas3d.vertex(r * cos(ang), hh, r * sin(ang));
+  }
+  canvas3d.endShape();
+
+  // base circular
+  canvas3d.beginShape(TRIANGLE_FAN);
+  canvas3d.vertex(0, hh, 0);
+  for(int i = lados; i >= 0; i--){
+    float ang = TWO_PI * i / lados;
+    canvas3d.vertex(r * cos(ang), hh, r * sin(ang));
+  }
+  canvas3d.endShape();
 }

@@ -1,5 +1,5 @@
 void settings(){
-  size(width, height);
+  size(width, height, P3D);
 }
 
 void setup() {
@@ -30,9 +30,12 @@ void setup() {
   initSound();
 
   svar = 1;
+  
+  canvas3d = createGraphics(300, 300, P3D);
 }
 
 void draw(){
+  hint(DISABLE_DEPTH_TEST);
   if(!deducao.isEmpty()){
     noStroke();
   }
