@@ -91,10 +91,10 @@ void viewInicial(){
   text("GeoApp  ·  Geometria Plana e Espacial", cx, height - 20);
 
   // ── Detecção de cliques ──────────────────────────
-  if(mousePressed){
-    if(estaSobre(btnX, btn1Y, btnW, btnH)){ tocarClick(); svar = 2; }
-    if(estaSobre(btnX, btn2Y, btnW, btnH)){ tocarClick(); svar = 3; }
-    if(estaSobre(btnX, btn3Y, btnW, btnH)){ tocarClick(); svar = 4; }
+  if(clickDetectado){
+    if(estaSobre(btnX, btn1Y, btnW, btnH)){ tocarClick(); svar = 2; clickDetectado = false; }
+    if(estaSobre(btnX, btn2Y, btnW, btnH)){ tocarClick(); svar = 3; clickDetectado = false; }
+    if(estaSobre(btnX, btn3Y, btnW, btnH)){ tocarClick(); svar = 4; clickDetectado = false; }
   }
 }
 

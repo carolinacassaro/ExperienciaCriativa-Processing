@@ -434,7 +434,222 @@ void popUp(){
     text("   A = (B+b) × h / 2",                 sx, sy+lh*5.9);
   }
 
-  // ── FALLBACK: texto simples (3D, circunferência) ─
+  // ── VOLUME DO PRISMA ────────────────────────────
+  if(deducao.startsWith("Deducao do volume do prisma")){
+    deducaoEspecial = true;
+
+    // figura: cubo em perspectiva isométrica simplificada
+    float px = fX + fW*0.10;
+    float py = fY + fH*0.22;
+    float pw = fW*0.80;
+    float ph = fH*0.52;
+    float ox = pw*0.30;
+    float oy = ph*0.30;
+
+    // face traseira (mais escura)
+    fill(color(180, 210, 180)); stroke(backgroundButton); strokeWeight(1.5);
+    quad(px+ox, py, px+pw+ox, py, px+pw+ox, py+ph, px+ox, py+ph);
+    // face lateral direita
+    fill(color(150, 190, 150));
+    quad(px+pw, py+oy, px+pw+ox, py, px+pw+ox, py+ph, px+pw, py+ph+oy);
+    // face frontal (mais clara)
+    fill(figura_fill);
+    quad(px, py+oy, px+pw, py+oy, px+pw, py+ph+oy, px, py+ph+oy);
+
+    // seta de altura h na lateral esquerda
+    stroke(header_bg); strokeWeight(2);
+    float arX = px - 18;
+    line(arX, py+oy, arX, py+ph+oy);
+    fill(header_bg); noStroke();
+    triangle(arX-5, py+oy+8, arX+5, py+oy+8, arX, py+oy);
+    triangle(arX-5, py+ph+oy-8, arX+5, py+ph+oy-8, arX, py+ph+oy);
+
+    // rótulos
+    fill(texto_dark); noStroke(); textSize(14); textAlign(CENTER, CENTER);
+    text("Ab", px+pw/2, py+ph+oy+18);
+    text("h", arX-14, py+ph/2+oy/2+oy/2);
+
+    // texto explicativo
+    textAlign(LEFT, TOP); textSize(17);
+    text("1. Ab = área da base do prisma",    sx, sy);
+    text("   (quadrada, triangular, etc.).",  sx, sy+lh*0.8);
+    text("2. O prisma é a base \"empilhada\"",  sx, sy+lh*2.0);
+    text("   ao longo da altura h.",           sx, sy+lh*2.8);
+    text("3. Volume = base × altura:",         sx, sy+lh*4.0);
+    text("   V = Ab × h",                     sx, sy+lh*5.2);
+    // linha separadora
+    stroke(borda_cor); strokeWeight(1);
+    line(sx, sy+lh*6.2, sx+mw*0.48, sy+lh*6.2);
+    noStroke(); fill(color(80,140,80)); textSize(14);
+    text("Ab varia com o tipo de base:",       sx, sy+lh*6.7);
+    fill(texto_dark); textSize(13);
+    text("Quadrada:    Ab = l²",               sx, sy+lh*7.6);
+    text("Triangular:  Ab = b × h_b / 2",     sx, sy+lh*8.4);
+    text("Hexagonal:   Ab = P × a / 2",       sx, sy+lh*9.2);
+  }
+
+  // ── VOLUME DA PIRÂMIDE ──────────────────────────
+  if(deducao.startsWith("Deducao do volume da piramide")){
+    deducaoEspecial = true;
+
+    float pcx = fX + fW/2;
+    float pBase = fY + fH*0.88;
+    float pTopo = fY + fH*0.08;
+    float hw    = fW*0.42;
+    float ox2   = fW*0.22;
+    float oy2   = fH*0.14;
+
+    // base da pirâmide (losango em perspectiva)
+    fill(color(180,210,180)); stroke(backgroundButton); strokeWeight(1.5);
+    quad(pcx,      pBase-oy2,
+         pcx+hw,   pBase,
+         pcx,      pBase+oy2,
+         pcx-hw,   pBase);
+    // face lateral esquerda
+    fill(color(150,190,150));
+    triangle(pcx-hw, pBase, pcx, pBase-oy2, pcx, pTopo);
+    // face lateral direita (mais clara)
+    fill(figura_fill);
+    triangle(pcx+hw, pBase, pcx, pBase-oy2, pcx, pTopo);
+
+    // linha de altura tracejada
+    stroke(header_bg); strokeWeight(1.5);
+    for(int i=0; i<6; i++){
+      float ty = pTopo + i*(pBase-oy2-pTopo)/6;
+      float ny = pTopo + (i+0.6)*(pBase-oy2-pTopo)/6;
+      line(pcx, ty, pcx, ny);
+    }
+    // ponto no topo e na base
+    fill(header_bg); noStroke();
+    circle(pcx, pTopo, 6);
+    circle(pcx, pBase-oy2, 6);
+
+    // rótulos
+    fill(texto_dark); noStroke(); textSize(14); textAlign(CENTER, CENTER);
+    text("Ab", pcx, pBase+oy2+14);
+    text("h", pcx+10, (pTopo+pBase)/2 - oy2/2);
+
+    // texto explicativo
+    textAlign(LEFT, TOP); textSize(17);
+    text("1. Um prisma de mesma base (Ab)",     sx, sy);
+    text("   e altura (h) equivale a",          sx, sy+lh*0.8);
+    text("   exatamente 3 pirâmides iguais.",   sx, sy+lh*1.6);
+    text("2. Volume do prisma = Ab × h",        sx, sy+lh*2.9);
+    text("3. Cada pirâmide ocupa 1/3:",         sx, sy+lh*4.0);
+    text("   V = Ab × h / 3",                  sx, sy+lh*5.2);
+    // separador
+    stroke(borda_cor); strokeWeight(1);
+    line(sx, sy+lh*6.2, sx+mw*0.48, sy+lh*6.2);
+    noStroke(); fill(color(80,140,80)); textSize(14);
+    text("Ab varia com o tipo de base:",        sx, sy+lh*6.7);
+    fill(texto_dark); textSize(13);
+    text("Quadrada:    Ab = l²",                sx, sy+lh*7.6);
+    text("Triangular:  Ab = b × h_b / 2",      sx, sy+lh*8.4);
+    text("Hexagonal:   Ab = P × a / 2",        sx, sy+lh*9.2);
+  }
+
+  // ── VOLUME DO CONE ──────────────────────────────
+  if(deducao.startsWith("Deducao do volume do cone")){
+    deducaoEspecial = true;
+
+    float ccx  = fX + fW/2;
+    float ctopo = fY + fH*0.06;
+    float cbase = fY + fH*0.82;
+    float cr    = fW*0.42;
+    float ey    = fH*0.10; // raio vertical da elipse da base
+
+    // elipse da base
+    fill(color(180,210,180)); stroke(backgroundButton); strokeWeight(1.5);
+    ellipse(ccx, cbase, cr*2, ey*2);
+
+    // lados do cone
+    fill(figura_fill);
+    // triângulo isósceles cobrindo os lados
+    beginShape();
+    vertex(ccx, ctopo);
+    vertex(ccx - cr, cbase);
+    // arco inferior da elipse (metade da frente)
+    for(int i = 180; i <= 360; i += 6){
+      float a = radians(i);
+      vertex(ccx + cr*cos(a), cbase + ey*sin(a));
+    }
+    vertex(ccx + cr, cbase);
+    endShape(CLOSE);
+
+    // linha de raio na base
+    stroke(header_bg); strokeWeight(2);
+    line(ccx, cbase, ccx+cr, cbase);
+    fill(header_bg); noStroke(); circle(ccx, cbase, 6);
+
+    // linha de altura tracejada
+    stroke(header_bg); strokeWeight(1.5);
+    for(int i=0; i<6; i++){
+      float ty = ctopo + i*(cbase-ctopo)/6;
+      float ny = ctopo + (i+0.6)*(cbase-ctopo)/6;
+      line(ccx, ty, ccx, ny);
+    }
+
+    // rótulos
+    fill(texto_dark); noStroke(); textSize(14); textAlign(CENTER, CENTER);
+    text("r", ccx+cr/2, cbase+ey+14);
+    text("h", ccx+12, (ctopo+cbase)/2);
+
+    // texto explicativo
+    textAlign(LEFT, TOP); textSize(17);
+    text("1. A base do cone é um círculo:", sx, sy);
+    text("   Ab = π × r²",                 sx, sy+lh*0.9);
+    text("2. Um cilindro de mesma base",    sx, sy+lh*2.2);
+    text("   e altura tem:",               sx, sy+lh*3.0);
+    text("   V_cil = π × r² × h",         sx, sy+lh*3.8);
+    text("3. O cone ocupa exatamente",     sx, sy+lh*5.1);
+    text("   1/3 do cilindro:",            sx, sy+lh*5.9);
+    text("   V = π × r² × h / 3",        sx, sy+lh*7.0);
+  }
+
+  // ── VOLUME DA ESFERA ────────────────────────────
+  if(deducao.startsWith("Deducao do volume da esfera")){
+    deducaoEspecial = true;
+
+    float ecx = fX + fW/2;
+    float ecy = fY + fH/2;
+    float er  = min(fW, fH) * 0.42;
+
+    // círculo principal
+    fill(figura_fill); stroke(backgroundButton); strokeWeight(2);
+    circle(ecx, ecy, er*2);
+
+    // equador (elipse horizontal)
+    noFill(); stroke(backgroundButton); strokeWeight(1.5);
+    ellipse(ecx, ecy, er*2, er*0.40);
+
+    // meridiano vertical (elipse vertical)
+    stroke(color(backgroundButton)); strokeWeight(1);
+    ellipse(ecx, ecy, er*0.40, er*2);
+
+    // raio
+    stroke(header_bg); strokeWeight(2);
+    line(ecx, ecy, ecx+er*cos(radians(-35)), ecy+er*sin(radians(-35)));
+    fill(header_bg); noStroke(); circle(ecx, ecy, 7);
+
+    // rótulo do raio
+    fill(texto_dark); noStroke(); textSize(14); textAlign(CENTER, CENTER);
+    text("r", ecx+er*0.62, ecy-er*0.30);
+
+    // texto explicativo
+    textAlign(LEFT, TOP); textSize(17);
+    text("1. A esfera é gerada girando",       sx, sy);
+    text("   um semicírculo 360° em torno",    sx, sy+lh*0.8);
+    text("   do seu diâmetro.",                sx, sy+lh*1.6);
+    text("2. Arquimedes provou que a esfera",  sx, sy+lh*2.9);
+    text("   ocupa exatamente 2/3 do",         sx, sy+lh*3.7);
+    text("   cilindro que a circunscreve.",    sx, sy+lh*4.5);
+    text("3. A dedução rigorosa usa",          sx, sy+lh*5.8);
+    text("   Cálculo Integral (fatias",        sx, sy+lh*6.6);
+    text("   infinitesimais). Resultado:",     sx, sy+lh*7.4);
+    text("   V = 4 × π × r³ / 3",            sx, sy+lh*8.5);
+  }
+
+  // ── FALLBACK: texto simples (circunferência, etc.) ─
   if(!deducaoEspecial){
     noStroke(); fill(texto_dark);
     textAlign(LEFT, TOP);
