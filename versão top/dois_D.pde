@@ -7,38 +7,37 @@ void view2d_1(){
   background(255);
   menu2d();
   fundoCanvas();
-  
-  // -- cria figura avaliada --
-  fill(255);
-  
-  if("Equilátero".equals(rotulo)){
-    triangle(canvaX+canvaW*1/13,canvaH*5/14,
-    canvaX+canvaW*3/13,canvaH*5/14,
-    canvaX+canvaW*2/13, canvaH*2/14);
-  }
-  else if("Isóceles".equals(rotulo)){
-    triangle(canvaX+canvaW*1.5/13,canvaH*5/14,
-    canvaX+canvaW*2.5/13,canvaH*5/14,
-    canvaX+canvaW*2/13, canvaH*2/14);
-  } else {
-    triangle(canvaX+canvaW*1.5/13,canvaH*4.5/14,
-    canvaX+canvaW*2.5/13,canvaH*5/14,
-    canvaX+canvaW*3/13, canvaH*2/14);
+  cabecalhoCanvas("Triângulo  —  " + rotulo, "FIGURA 2D");
+  painelFigura(canvaX + 10, 46, canvaW*4/13, canvaH*7/14 - 46);
+
+  // -- cria figura avaliada (só quando o popup está fechado) --
+  if(deducao.isEmpty()){
+    fill(figura_fill);
+    stroke(backgroundButton); strokeWeight(2);
+    if("Equilátero".equals(rotulo)){
+      triangle(canvaX+canvaW*1/13,canvaH*5/14,
+               canvaX+canvaW*3/13,canvaH*5/14,
+               canvaX+canvaW*2/13, canvaH*2/14);
+    } else if("Isóceles".equals(rotulo)){
+      triangle(canvaX+canvaW*1.5/13,canvaH*5/14,
+               canvaX+canvaW*2.5/13,canvaH*5/14,
+               canvaX+canvaW*2/13, canvaH*2/14);
+    } else {
+      triangle(canvaX+canvaW*1.5/13,canvaH*4.5/14,
+               canvaX+canvaW*2.5/13,canvaH*5/14,
+               canvaX+canvaW*3/13, canvaH*2/14);
+    }
+    noStroke();
   }
   // ----------------------------
-  
+
   // -- cria classificações --
   float clX = canvaX + 20;
   float clY = canvaH*5.5/14;
-  int n = 3;
-  float gap = 10;
-  float available = canvaW - 40;
-  float clW = min(120, (available - (n-1)*gap) / n);
+  int n = 3; float gap = 10;
+  float clW = min(120, (canvaW*4/13 - 40 - (n-1)*gap) / n);
   float clH = 36;
-
-  textAlign(CENTER, CENTER);
-  textSize(12);
-
+  textAlign(CENTER, CENTER); textSize(12);
   rotulo("Equilátero", clX, clY, clW, clH);
   rotulo("Isóceles", clX+clW+gap, clY, clW, clH);
   rotulo("Escaleno", clX+(clW+gap)*2, clY, clW, clH);
@@ -48,10 +47,10 @@ void view2d_1(){
   titulo("ÁREA", canvaX+canvaW*4.5/13, canvaH*1/14);
   card(deducaoTriangulo(), "b x h\n-------------\n    2     ", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
   painelValores2d();
-  
+
   float glossTitleY = canvaH*11.0/14;
   float glossBoxY = glossTitleY + (canvaH*0.5/14) + 8;
-  tituloCurto("GLOSSARIO", canvaX + canvaW*0.5/13, glossTitleY, 360);
+  tituloCurto("GLOSSARIO", canvaX+canvaW*0.5/13, glossTitleY, 360);
   glossario2d("b = base\nh = altura", canvaX+canvaW*0.5/13, glossBoxY, 360, 40);
   // ----------------------------
 }
@@ -60,29 +59,30 @@ void view2d_2(){
   background(255);
   menu2d();
   fundoCanvas();
-  
-  // -- cria figura avaliada --
-  fill(255);
-  
-  if("Quadrado".equals(rotulo)){
-    rect(canvaX+canvaW/13, canvaY+canvaH*2/13, canvaW*2/13, canvaH*4/14);
-  } else {
-    rect(canvaX+canvaW/13, canvaY+canvaH*2/13, canvaW*3/13, canvaH*4/14);
+  String nomeAtual = "Quadrado".equals(rotulo) ? "Quadrado" : "Retângulo";
+  cabecalhoCanvas(nomeAtual, "FIGURA 2D");
+  painelFigura(canvaX + 10, 46, canvaW*4/13, canvaH*7/14 - 46);
+
+  // -- cria figura avaliada (só quando o popup está fechado) --
+  if(deducao.isEmpty()){
+    fill(figura_fill);
+    stroke(backgroundButton); strokeWeight(2);
+    if("Quadrado".equals(rotulo)){
+      rect(canvaX+canvaW/13, canvaY+canvaH*2/13, canvaW*2/13, canvaH*4/14);
+    } else {
+      rect(canvaX+canvaW/13, canvaY+canvaH*2/13, canvaW*3/13, canvaH*4/14);
+    }
+    noStroke();
   }
   // ------------------------
-  
+
   // -- cria classificações --
   float clX = canvaX + 20;
   float clY = canvaH*6.5/14;
-  int n = 2;
-  float gap = 10;
-  float available = canvaW - 40;
-  float clW = min(140, (available - (n-1)*gap) / n);
+  int n = 2; float gap = 10;
+  float clW = min(140, (canvaW*4/13 - 40 - (n-1)*gap) / n);
   float clH = 36;
-
-  textAlign(CENTER, CENTER);
-  textSize(12);
-
+  textAlign(CENTER, CENTER); textSize(12);
   rotulo("Quadrado", clX, clY, clW, clH);
   rotulo("Retangulo", clX+clW+gap, clY, clW, clH);
   // -----------------------------
@@ -95,10 +95,10 @@ void view2d_2(){
     titulo("DIAGONAL", canvaX+canvaW*4.5/13, canvaH*5/14);
     card("diagonal", "d = L x √2", canvaX+canvaW*4.5/13, canvaH*6/14, 150, canvaH*2/14);
   }
-  
+
   float glossTitleY = canvaH*11.0/14;
   float glossBoxY = glossTitleY + (canvaH*0.5/14) + 8;
-  tituloCurto("GLOSSARIO", canvaX + canvaW*0.5/13, glossTitleY, 360);
+  tituloCurto("GLOSSARIO", canvaX+canvaW*0.5/13, glossTitleY, 360);
   if("Quadrado".equals(rotulo)){
     glossario2d("l = lado\nd = diagonal", canvaX+canvaW*0.5/13, glossBoxY, 360, 40);
   } else {
@@ -111,22 +111,30 @@ void view2d_3(){ // circulo
   background(255);
   menu2d();
   fundoCanvas();
-  
-  // -- cria figura avaliada --
-  fill(255);
-  circle(canvaX + canvaW*2/13, canvaY + canvaH*6/24, canvaW*2/13);
+  cabecalhoCanvas("Círculo", "FIGURA 2D");
+  painelFigura(canvaX + 10, 46, canvaW*4/13, canvaH*7/14 - 46);
+
+  // -- cria figura avaliada (só quando o popup está fechado) --
+  if(deducao.isEmpty()){
+    fill(figura_fill);
+    stroke(backgroundButton); strokeWeight(2);
+    circle(canvaX + canvaW*2/13, canvaY + canvaH*6/24, canvaW*2/13);
+    noStroke();
+  }
   // ------------------------
 
   // -- cria módulos na direita --
   titulo("ÁREA", canvaX+canvaW*4.5/13, canvaH*1/14);
-  card("Arquimedes (250 a.C.) inscreveu e circunscreveu poligonos regulares no circulo, aproximando cada vez mais sua area.\n\nA deducao rigorosa exige Calculo Integral, conteudo de nivel superior.\n\nPor isso, enunciamos o resultado:\n\n   A = pi x R^2\n\npi = 3,14...  |  R = raio do circulo", "A = pi x R^2", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
+  card("Arquimedes (250 a.C.) inscreveu e circunscreveu poligonos regulares no circulo, aproximando cada vez mais sua area.\n\nA deducao rigorosa exige Calculo Integral, conteudo de nivel superior.\n\nPor isso, enunciamos o resultado:\n\n   A = pi x R^2\n\npi = 3,14...  |  R = raio do circulo",
+       "A = pi x R^2", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
   painelValores2d();
   titulo("CIRCUNFERÊNCIA", canvaX+canvaW*4.5/13, canvaH*5/14);
-  card("A circunferencia e o comprimento total da borda do circulo.\n\nEla e proporcional ao raio R:\n\n   C = 2 x pi x R\n\npi = 3,14...  |  R = raio do circulo", "C = 2 x pi x R", canvaX+canvaW*4.5/13, canvaH*6/14, 150, canvaH*2/14);
-  
+  card("A circunferencia e o comprimento total da borda do circulo.\n\nEla e proporcional ao raio R:\n\n   C = 2 x pi x R\n\npi = 3,14...  |  R = raio do circulo",
+       "C = 2 x pi x R", canvaX+canvaW*4.5/13, canvaH*6/14, 150, canvaH*2/14);
+
   float glossTitleY = canvaH*11.0/14;
   float glossBoxY = glossTitleY + (canvaH*0.5/14) + 8;
-  tituloCurto("GLOSSARIO", canvaX + canvaW*0.5/13, glossTitleY, 360);
+  tituloCurto("GLOSSARIO", canvaX+canvaW*0.5/13, glossTitleY, 360);
   glossario2d("R = raio do circulo\nC = comprimento total", canvaX+canvaW*0.5/13, glossBoxY, 360, 40);
   // ----------------------------
 }
@@ -135,21 +143,29 @@ void view2d_4(){ // hexagono
   background(255);
   menu2d();
   fundoCanvas();
-  
-  // -- cria figura avaliada --
-  fill(255);
-  desenharHexagono(canvaX + canvaW*2/13, canvaH*4/14, canvaW*1/13);
+  cabecalhoCanvas("Hexágono Regular", "FIGURA 2D");
+  painelFigura(canvaX + 10, 46, canvaW*4/13, canvaH*7/14 - 46);
+
+  // -- cria figura avaliada (só quando o popup está fechado) --
+  // IMPORTANTE: beginShape/vertex/endShape em P3D renderiza o stroke numa
+  // passagem separada; sem este guard o contorno aparece por cima do popup.
+  if(deducao.isEmpty()){
+    fill(figura_fill);
+    stroke(backgroundButton); strokeWeight(2);
+    desenharHexagono(canvaX + canvaW*2/13, canvaH*4/14, canvaW*1/13);
+    noStroke();
+  }
   // ------------------------
 
   // -- cria módulos na direita --
   titulo("ÁREA", canvaX+canvaW*4.5/13, canvaH*1/14);
   card(deducaoHexagono(), "3 x a^2 x √3\n-----------\n     2     ", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
   painelValores2d();
-  
+
   float glossTitleY = canvaH*11.0/14;
   float glossBoxY = glossTitleY + (canvaH*0.5/14) + 8;
-  tituloCurto("GLOSSARIO", canvaX + canvaW*0.5/13, glossTitleY, 360);
-  glossario2d("a = lado/apotema", canvaX+canvaW*0.5/13, glossBoxY, 360, 30);
+  tituloCurto("GLOSSARIO", canvaX+canvaW*0.5/13, glossTitleY, 360);
+  glossario2d("a = lado do hexagono", canvaX+canvaW*0.5/13, glossBoxY, 360, 30);
   // ----------------------------
 }
 
@@ -157,23 +173,29 @@ void view2d_5(){ // losango
   background(255);
   menu2d();
   fundoCanvas();
-  
-  // -- cria figura avaliada --
-  fill(255);
-  quad(canvaX+canvaW*2/13, canvaH*2/14, // vertice topo
-       canvaX+canvaW/13, canvaH*3/14,   // vertice esquerda
-       canvaX+canvaW*2/13, canvaH*4/14, // vertice baixo
-       canvaX+canvaW*3/13, canvaH*3/14); // vertice direita
+  cabecalhoCanvas("Losango", "FIGURA 2D");
+  painelFigura(canvaX + 10, 46, canvaW*4/13, canvaH*7/14 - 46);
+
+  // -- cria figura avaliada (só quando o popup está fechado) --
+  if(deducao.isEmpty()){
+    fill(figura_fill);
+    stroke(backgroundButton); strokeWeight(2);
+    quad(canvaX+canvaW*2/13, canvaH*2/14,
+         canvaX+canvaW/13,   canvaH*3/14,
+         canvaX+canvaW*2/13, canvaH*4/14,
+         canvaX+canvaW*3/13, canvaH*3/14);
+    noStroke();
+  }
   // ------------------------
 
   // -- cria módulos na direita --
   titulo("ÁREA", canvaX+canvaW*4.5/13, canvaH*1/14);
   card(deducaoLosango(), "D x d\n---------\n   2   ", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
   painelValores2d();
-  
+
   float glossTitleY = canvaH*11.0/14;
   float glossBoxY = glossTitleY + (canvaH*0.5/14) + 8;
-  tituloCurto("GLOSSARIO", canvaX + canvaW*0.5/13, glossTitleY, 360);
+  tituloCurto("GLOSSARIO", canvaX+canvaW*0.5/13, glossTitleY, 360);
   glossario2d("D = diagonal maior\nd = diagonal menor", canvaX+canvaW*0.5/13, glossBoxY, 360, 40);
   // ----------------------------
 }
@@ -182,28 +204,34 @@ void view2d_6(){ // trapezio
   background(255);
   menu2d();
   fundoCanvas();
-  
-  // -- cria figura avaliada --
-  fill(255);
-  quad(canvaX + canvaW/13, canvaH*4/14,       // Vértice inferior esquerdo
-       canvaX + canvaW*3/13, canvaH*4/14,     // Vértice inferior direito
-       canvaX + canvaW*2.5/13, canvaH*2/14,   // Vértice superior direito
-       canvaX + canvaW*1.5/13, canvaH*2/14);  // Vértice superior esquerdo
+  cabecalhoCanvas("Trapézio", "FIGURA 2D");
+  painelFigura(canvaX + 10, 46, canvaW*4/13, canvaH*7/14 - 46);
+
+  // -- cria figura avaliada (só quando o popup está fechado) --
+  if(deducao.isEmpty()){
+    fill(figura_fill);
+    stroke(backgroundButton); strokeWeight(2);
+    quad(canvaX+canvaW/13,   canvaH*4/14,
+         canvaX+canvaW*3/13, canvaH*4/14,
+         canvaX+canvaW*2.5/13, canvaH*2/14,
+         canvaX+canvaW*1.5/13, canvaH*2/14);
+    noStroke();
+  }
   // ------------------------
 
   // -- cria módulos na direita --
   titulo("ÁREA", canvaX+canvaW*4.5/13, canvaH*1/14);
   card(deducaoTrapezio(), "(B+b) x h\n-----------\n     2     ", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
   painelValores2d();
-  
+
   float glossTitleY = canvaH*11.0/14;
   float glossBoxY = glossTitleY + (canvaH*0.5/14) + 8;
-  tituloCurto("GLOSSARIO", canvaX + canvaW*0.5/13, glossTitleY, 360);
+  tituloCurto("GLOSSARIO", canvaX+canvaW*0.5/13, glossTitleY, 360);
   glossario2d("B = base maior\nb = base menor\nh = altura", canvaX+canvaW*0.5/13, glossBoxY, 360, 50);
   // ----------------------------
 }
 
-// Painel de valores para 2D (inputs e resultados)
+// ── Painel de cálculo 2D ─────────────────────────
 void painelValores2d(){
   int fieldCount = 0;
   if(svar == 21) fieldCount = 2;
@@ -212,192 +240,150 @@ void painelValores2d(){
   else if(svar == 24) fieldCount = 1;
   else if(svar == 25) fieldCount = 2;
   else if(svar == 26) fieldCount = 3;
-
   if(fieldCount == 0) return;
 
   float x = canvaX + canvaW*4.5/13;
   float y = canvaH*9.2/14;
   float w = 170;
-  float h = max(canvaH*4/14, 80 + fieldCount * 50);
+  float h = max(canvaH*4/14, 90 + fieldCount * 50);
+
+  // sombra
+  noStroke(); fill(shadow_col);
+  rect(x + 3, y + 3, w, h, 24);
+
+  // fundo
   fill(255);
-  if(deducao.isEmpty()){
-    stroke(80);
-    strokeWeight(1.5);
-  } else {
-    noStroke();
-  }
+  if(deducao.isEmpty()){ stroke(borda_cor); strokeWeight(1.5); }
+  else { noStroke(); }
   rect(x, y, w, h, 24);
-  fill(0);
-  textSize(12);
-  textAlign(LEFT, TOP);
-  text("Inserir valores para calcular:", x + 14, y + 14, w - 28, 24);
+
+  // header verde do painel
+  fill(header_bg); noStroke();
+  rect(x, y, w, 38, 24, 24, 0, 0);
+  fill(255); textSize(11); textAlign(LEFT, CENTER);
+  text("Calcular área", x + 14, y + 19);
 
   float fieldX = x + 14;
-  float fieldY = y + 44;
+  float fieldY = y + 50;
   float fieldW = w - 28;
   float fieldH = 32;
   float rowSpacing = 46;
 
-  if(svar == 21){ // triangulo
+  if(svar == 21){
     campoEntrada2d("b", fieldX, fieldY, fieldW, fieldH, valorB);
-    campoEntrada2d("h", fieldX, fieldY + rowSpacing, fieldW, fieldH, valorH);
+    campoEntrada2d("h", fieldX, fieldY+rowSpacing, fieldW, fieldH, valorH);
   }
-  if(svar == 22){ // quadrado/retangulo
+  if(svar == 22){
     if("Quadrado".equals(rotulo)) campoEntrada2d("l", fieldX, fieldY, fieldW, fieldH, valorL);
     else {
       campoEntrada2d("b", fieldX, fieldY, fieldW, fieldH, valorB);
-      campoEntrada2d("h", fieldX, fieldY + rowSpacing, fieldW, fieldH, valorH);
+      campoEntrada2d("h", fieldX, fieldY+rowSpacing, fieldW, fieldH, valorH);
     }
   }
-  if(svar == 23){ // circulo
-    campoEntrada2d("r", fieldX, fieldY, fieldW, fieldH, valorR);
-  }
-  if(svar == 24){ // hexagono
-    campoEntrada2d("a", fieldX, fieldY, fieldW, fieldH, valorA);
-  }
-  if(svar == 25){ // losango
+  if(svar == 23) campoEntrada2d("r", fieldX, fieldY, fieldW, fieldH, valorR);
+  if(svar == 24) campoEntrada2d("a", fieldX, fieldY, fieldW, fieldH, valorA);
+  if(svar == 25){
     campoEntrada2d("D", fieldX, fieldY, fieldW, fieldH, valorP);
-    campoEntrada2d("d", fieldX, fieldY + rowSpacing, fieldW, fieldH, valorA);
+    campoEntrada2d("d", fieldX, fieldY+rowSpacing, fieldW, fieldH, valorA);
   }
-  if(svar == 26){ // trapezio
+  if(svar == 26){
     campoEntrada2d("B", fieldX, fieldY, fieldW, fieldH, valorP);
-    campoEntrada2d("b", fieldX, fieldY + rowSpacing, fieldW, fieldH, valorB);
-    campoEntrada2d("h", fieldX, fieldY + rowSpacing * 2, fieldW, fieldH, valorH);
+    campoEntrada2d("b", fieldX, fieldY+rowSpacing, fieldW, fieldH, valorB);
+    campoEntrada2d("h", fieldX, fieldY+rowSpacing*2, fieldW, fieldH, valorH);
   }
   exibirResultados2d(x + w + 20, y, 240, h);
 }
 
-void campoEntrada2d(String label, float x, float y, float w, float h, String valor){
-  boolean over = estaSobre(x, y, w, h);
-  boolean active = activeInput.equals(label);
-  fill(active ? color(230, 240, 255) : over ? color(235, 245, 255) : color(250));
-  if(deducao.isEmpty()){
-    stroke(active ? color(90, 140, 255) : 160);
-    strokeWeight(active ? 2 : 1);
-  } else {
-    noStroke();
-  }
-  rect(x, y, w, h, 12);
-  fill(0);
-  textSize(14);
-  textAlign(LEFT, CENTER);
-  text(label + ": " + (valor.equals("") ? "..." : valor), x + 12, y + h/2);
-
-  if(mousePressed){
-    if(over){
-      tocarClick();
-      activeInput = label;
-    }
-  }
-}
-
 void exibirResultados2d(float x, float y, float w, float h){
-  fill(245);
-  if(deducao.isEmpty()){
-    stroke(80);
-    strokeWeight(1.2);
-  } else {
-    noStroke();
-  }
-  rect(x, y, w, h, 20);
-  fill(0);
-  textSize(14);
-  textAlign(LEFT, TOP);
+  // sombra
+  noStroke(); fill(shadow_col);
+  rect(x + 3, y + 3, w, h, 20);
 
-  float espacamento = 22;
-  float posY = y + 16;
-  text("Resultados:", x + 14, posY);
-  posY += espacamento;
+  // fundo
+  fill(248, 253, 248);
+  if(deducao.isEmpty()){ stroke(borda_cor); strokeWeight(1.2); }
+  else { noStroke(); }
+  rect(x, y, w, h, 20);
+
+  // header verde
+  fill(header_bg); noStroke();
+  rect(x, y, w, 38, 20, 20, 0, 0);
+  fill(255); textSize(12); textAlign(LEFT, CENTER);
+  text("Resultados", x + 14, y + 19);
+
+  noStroke(); fill(texto_dark);
+  textSize(14); textAlign(LEFT, TOP);
 
   float area = 0;
-  // calcula area dependendo de svar/rotulo
-  if(svar == 21){ // triangulo
-    area = parseFloatSeguro(valorB) * parseFloatSeguro(valorH) / 2;
-  } else if(svar == 22){ // quadrado/retangulo
-    if("Quadrado".equals(rotulo)) area = pow(parseFloatSeguro(valorL), 2);
-    else area = parseFloatSeguro(valorB) * parseFloatSeguro(valorH);
-  } else if(svar == 23){
-    area = PI * pow(parseFloatSeguro(valorR), 2);
-  } else if(svar == 24){
-    area = 3 * pow(parseFloatSeguro(valorA), 2) * sqrt(3) / 2;
-  } else if(svar == 25){
-    area = parseFloatSeguro(valorP) * parseFloatSeguro(valorA) / 2; // using D,d approximation (user fields mapping)
-  } else if(svar == 26){
-    area = (parseFloatSeguro(valorP) + parseFloatSeguro(valorB)) * parseFloatSeguro(valorH) / 2;
-  }
+  if(svar == 21)      area = parseFloatSeguro(valorB) * parseFloatSeguro(valorH) / 2;
+  else if(svar == 22) area = "Quadrado".equals(rotulo) ? pow(parseFloatSeguro(valorL),2) : parseFloatSeguro(valorB)*parseFloatSeguro(valorH);
+  else if(svar == 23) area = PI * pow(parseFloatSeguro(valorR), 2);
+  else if(svar == 24) area = 3 * pow(parseFloatSeguro(valorA), 2) * sqrt(3) / 2;
+  else if(svar == 25) area = parseFloatSeguro(valorP) * parseFloatSeguro(valorA) / 2;
+  else if(svar == 26) area = (parseFloatSeguro(valorP) + parseFloatSeguro(valorB)) * parseFloatSeguro(valorH) / 2;
 
   if(area > 0){
-    text("Area = " + nf(area, 0, 2), x + 14, posY);
+    fill(header_bg);
+    textSize(14); textAlign(LEFT, TOP);
+    text("Área = " + nf(area, 0, 2), x + 14, y + 50);
   } else {
-    text("Preencha os valores...", x + 14, posY);
+    fill(color(160));
+    textSize(12);
+    text("Preencha os campos...", x + 14, y + 50);
   }
 }
 
-// /////////////////////////////////////////////////////////////////////////////////
+// ── Menu lateral 2D ──────────────────────────────
 void menu2d(){
-  // -- background do menu lateral --
-  noStroke();
-  fill(255);
+  // fundo verde escuro da sidebar
+  noStroke(); fill(sidebar_bg);
   rect(0, 0, btnWidth, height);
 
   // -- menu: --
   menu2opcoes = 6;
-  // -----------------------
 
-  // -- cria os botoes: --
-  for(int i = 0; i<menu2opcoes; i++){
-    button(i);
-  }
-  // -----------------------
-  
-  // -- cria ativacao dos botoes: --
+  // -- cria os botoes (highlights) --
+  for(int i = 0; i < menu2opcoes; i++) button(i);
+
+  // -- cria ativacao dos botoes --
   if(mousePressed && deducao.isEmpty()){
-    for(int i = 0; i<menu2opcoes; i++){
-      if (mouseX >= 0 && mouseX <= btnWidth && mouseY >= btnHeight*i && mouseY <= btnHeight*(i+1)) {
+    for(int i = 0; i < menu2opcoes; i++){
+      if(mouseX >= 0 && mouseX <= btnWidth && mouseY >= btnHeight*i && mouseY <= btnHeight*(i+1)){
         svar = 21 + i;
         limparValores();
       }
     }
   }
-  // -----------------------
-  
-  // -- especifica os botoes --
-  fill(255);
-  
-  // botao 1: triangulo
-  triangle(btnWidth/4,btnHeight*3/4,btnWidth*3/4,btnHeight*3/4,btnWidth/2,btnHeight/4);
-  
-  // botao 2: retangulo
-  rect(btnWidth/4,btnHeight*1.25, btnWidth/2, btnHeight/2);
-  
-  // botao 3: circulo
-  circle(btnWidth/2,btnHeight*2.5,btnWidth/3);
-  
-  // botao 4: hexagono
-  desenharHexagono(btnWidth/2, btnHeight*3.5, btnWidth/6); // x,y,raio
-  
-  // botao 5: losango
-  quad(btnWidth/2, btnHeight*4.25, // vertice topo
-  btnWidth/4,btnHeight*4.5,        // vertice esquerda
-  btnWidth/2, btnHeight*4.75,      // vertice baixo
-  btnWidth*3/4, btnHeight*4.5);    // vertice direita
-  
-  // botao 6: trapezio
-  quad(btnWidth/4, btnHeight*5+btnHeight*3/4,   // Vértice inferior esquerdo
-       btnWidth*3/4, btnHeight*5+btnHeight*3/4, // Vértice inferior direito
-       btnWidth*5/8, btnHeight*5+btnHeight/4,   // Vértice superior direito
-       btnWidth*3/8, btnHeight*5+btnHeight/4);  // Vértice superior esquerdo
-  // -----------------------
-  
-  // cria o botao de voltar
-  buttonBack(1);
-}
 
-void glossario2d(String texto, float x, float y, float w, float h){
-  fill(240);
-  rect(x, y, w, h, 20);
-  fill(0);
-  textSize(11);
-  textAlign(LEFT, TOP);
-  text(texto, x + 15, y + 15);
+  // -- ícones brancos das figuras --
+  fill(255); noStroke();
+
+  // triangulo
+  triangle(btnWidth/4, btnHeight*3/4-6, btnWidth*3/4, btnHeight*3/4-6, btnWidth/2, btnHeight/4-2);
+  // retangulo
+  rect(btnWidth*0.2, btnHeight*1.24, btnWidth*0.6, btnHeight*0.38);
+  // circulo
+  circle(btnWidth/2, btnHeight*2.46, btnWidth/3.2);
+  // hexagono
+  desenharHexagono(btnWidth/2, btnHeight*3.42, btnWidth/5.5);
+  // losango
+  quad(btnWidth/2,    btnHeight*4.22,
+       btnWidth/4,    btnHeight*4.5,
+       btnWidth/2,    btnHeight*4.78,
+       btnWidth*3/4,  btnHeight*4.5);
+  // trapezio
+  quad(btnWidth*0.25, btnHeight*5+btnHeight*0.72,
+       btnWidth*0.75, btnHeight*5+btnHeight*0.72,
+       btnWidth*0.625,btnHeight*5+btnHeight*0.26,
+       btnWidth*0.375,btnHeight*5+btnHeight*0.26);
+
+  // -- nomes das figuras (legenda pequena) --
+  String[] nomes = {"Triângulo","Retângulo","Círculo","Hexágono","Losango","Trapézio"};
+  fill(badge_text); textSize(9); textAlign(CENTER, CENTER);
+  for(int i = 0; i < nomes.length; i++){
+    text(nomes[i], btnWidth/2, btnHeight*(i+1) - 14);
+  }
+
+  // botao de voltar
+  buttonBack(1);
 }
