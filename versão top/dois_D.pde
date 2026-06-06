@@ -45,7 +45,7 @@ void view2d_1(){
 
   // -- cria módulos na direita --
   titulo("ÁREA", canvaX+canvaW*4.5/13, canvaH*1/14);
-  card(deducaoTriangulo(), "b x h\n-------------\n    2     ", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
+  card("ded_triangulo", "b x h\n-------------\n    2     ", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
   painelValores2d();
 
   float glossTitleY = canvaH*11.0/14;
@@ -63,15 +63,15 @@ void view2d_2(){
   cabecalhoCanvas(nomeAtual, "FIGURA 2D");
   painelFigura(canvaX + 10, 46, canvaW*4/13, canvaH*7/14 - 46);
 
-  // -- cria figura avaliada (só quando o popup está fechado) --
+  // -- cria figura avaliada centrada no painel (só quando o popup está fechado) --
   if(deducao.isEmpty()){
+    float panelCX = canvaX + 10 + (canvaW*4/13) / 2.0;
+    float panelCY = 46 + (canvaH*7/14 - 46) / 2.0;
+    float rW = "Quadrado".equals(rotulo) ? canvaW*2/13 : canvaW*3/13;
+    float rH = canvaH*4/14;
     fill(figura_fill);
     stroke(backgroundButton); strokeWeight(2);
-    if("Quadrado".equals(rotulo)){
-      rect(canvaX+canvaW/13, canvaY+canvaH*2/13, canvaW*2/13, canvaH*4/14);
-    } else {
-      rect(canvaX+canvaW/13, canvaY+canvaH*2/13, canvaW*3/13, canvaH*4/14);
-    }
+    rect(panelCX - rW/2, panelCY - rH/2, rW, rH);
     noStroke();
   }
   // ------------------------
@@ -89,7 +89,7 @@ void view2d_2(){
 
   // -- cria módulos na direita --
   titulo("ÁREA", canvaX+canvaW*4.5/13, canvaH*1/14);
-  card(deducaoRetangulo(), "A = b x h", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
+  card("ded_retangulo", "A = b x h", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
   painelValores2d();
   if("Quadrado".equals(rotulo)){
     titulo("DIAGONAL", canvaX+canvaW*4.5/13, canvaH*5/14);
@@ -125,7 +125,7 @@ void view2d_3(){ // circulo
 
   // -- cria módulos na direita --
   titulo("ÁREA", canvaX+canvaW*4.5/13, canvaH*1/14);
-  card("Arquimedes (250 a.C.) inscreveu e circunscreveu poligonos regulares no circulo, aproximando cada vez mais sua area.\n\nA deducao rigorosa exige Calculo Integral, conteudo de nivel superior.\n\nPor isso, enunciamos o resultado:\n\n   A = pi x R^2\n\npi = 3,14...  |  R = raio do circulo",
+  card("ded_circulo",
        "A = pi x R^2", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
   painelValores2d();
   titulo("CIRCUNFERÊNCIA", canvaX+canvaW*4.5/13, canvaH*5/14);
@@ -159,7 +159,7 @@ void view2d_4(){ // hexagono
 
   // -- cria módulos na direita --
   titulo("ÁREA", canvaX+canvaW*4.5/13, canvaH*1/14);
-  card(deducaoHexagono(), "3 x a^2 x √3\n-----------\n     2     ", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
+  card("ded_hexagono", "3 x a^2 x √3\n-----------\n     2     ", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
   painelValores2d();
 
   float glossTitleY = canvaH*11.0/14;
@@ -190,7 +190,7 @@ void view2d_5(){ // losango
 
   // -- cria módulos na direita --
   titulo("ÁREA", canvaX+canvaW*4.5/13, canvaH*1/14);
-  card(deducaoLosango(), "D x d\n---------\n   2   ", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
+  card("ded_losango", "D x d\n---------\n   2   ", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
   painelValores2d();
 
   float glossTitleY = canvaH*11.0/14;
@@ -221,7 +221,7 @@ void view2d_6(){ // trapezio
 
   // -- cria módulos na direita --
   titulo("ÁREA", canvaX+canvaW*4.5/13, canvaH*1/14);
-  card(deducaoTrapezio(), "(B+b) x h\n-----------\n     2     ", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
+  card("ded_trapezio", "(B+b) x h\n-----------\n     2     ", canvaX+canvaW*4.5/13, canvaH*2/14, 150, canvaH*2/14);
   painelValores2d();
 
   float glossTitleY = canvaH*11.0/14;

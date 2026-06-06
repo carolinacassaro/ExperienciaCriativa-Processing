@@ -270,11 +270,177 @@ void popUp(){
   stroke(220); strokeWeight(1);
   line(cx + 18, cy + 52, cx + cw - 18, cy + 52);
 
-  // conteúdo
-  noStroke(); fill(texto_dark);
-  textAlign(LEFT, TOP);
-  textSize(18);
-  text(deducao, cx + 26, cy + 66, cw - 52, ch - 76);
+  // ── Coordenadas do conteúdo visual ──────────────
+  float mx = cx;
+  float my = cy + 68;
+  float mw = cw;
+  float mh = ch - 68;
+  float fX = mx + mw/13;
+  float fY = my + mh/14;
+  float fW = mw * 2/13;
+  float fH = mh * 4/14;
+  float sx = mx + mw * 4/13;
+  float sy = my + mh * 2/14;
+  float lh = mh / 14;
+
+  boolean deducaoEspecial = false;
+
+  // ── DIAGONAL DO QUADRADO ────────────────────────
+  if("Quadrado".equals(rotulo) && "diagonal".equals(deducao)){
+    deducaoEspecial = true;
+    fill(248,252,248); stroke(borda_cor); strokeWeight(1);
+    rect(fX, fY, fW, fH);
+    stroke(backgroundButton); strokeWeight(2);
+    line(fX, fY, fX+fW, fY+fH);
+    fill(texto_dark); noStroke(); textSize(16); textAlign(CENTER, CENTER);
+    text("A", fX-15, fY+fH/2);
+    text("B", fX+fW/2, fY+fH+18);
+    text("d", fX+fW/2+8, fY+lh*0.75);
+    textAlign(LEFT, TOP); textSize(18);
+    text("A = B  (quadrado)", sx, sy);
+    text("d² = A² + A²",     sx, sy+lh);
+    text("d² = 2 × A²",      sx, sy+lh*2);
+    text("d = √(2 × A²)",    sx, sy+lh*3);
+    text("d = √2 × A",       sx, sy+lh*4);
+    text("d = A × √2",       sx, sy+lh*5);
+  }
+
+  // ── ÁREA DO TRIÂNGULO ───────────────────────────
+  if("ded_triangulo".equals(deducao)){
+    deducaoEspecial = true;
+    fill(220,235,220); stroke(160); strokeWeight(1);
+    rect(fX, fY, fW, fH);
+    fill(figura_fill); stroke(backgroundButton); strokeWeight(2);
+    triangle(fX, fY+fH, fX+fW, fY+fH, fX, fY);
+    noStroke();
+    fill(texto_dark); textSize(16); textAlign(CENTER, CENTER);
+    text("b", fX+fW/2, fY+fH+20);
+    text("h", fX-20, fY+fH/2);
+    textAlign(LEFT, TOP); textSize(18);
+    text("1. O triângulo cabe na metade de um", sx, sy);
+    text("   retângulo de mesma base e altura.", sx, sy+lh*0.7);
+    text("2. Área do retângulo = b × h",         sx, sy+lh*1.8);
+    text("3. O triângulo ocupa metade disso.",    sx, sy+lh*3.0);
+    text("4. Portanto:",                          sx, sy+lh*4.2);
+    text("   A = b × h / 2",                     sx, sy+lh*5.2);
+  }
+
+  // ── ÁREA DO RETÂNGULO ───────────────────────────
+  if("ded_retangulo".equals(deducao)){
+    deducaoEspecial = true;
+    fill(figura_fill); stroke(backgroundButton); strokeWeight(2);
+    rect(fX, fY, fW, fH);
+    stroke(100); strokeWeight(1);
+    for(int i=1;i<3;i++) line(fX+fW*i/3, fY, fX+fW*i/3, fY+fH);
+    for(int i=1;i<4;i++) line(fX, fY+fH*i/4, fX+fW, fY+fH*i/4);
+    noStroke();
+    fill(texto_dark); textSize(16); textAlign(CENTER, CENTER);
+    text("b", fX+fW/2, fY+fH+20);
+    text("h", fX-20, fY+fH/2);
+    textAlign(LEFT, TOP); textSize(18);
+    text("1. O retângulo tem b unidades de base", sx, sy);
+    text("   e h unidades de altura.",            sx, sy+lh*0.7);
+    text("2. Ele forma b × h quadradinhos de",    sx, sy+lh*1.8);
+    text("   área unitária.",                     sx, sy+lh*2.5);
+    text("3. Portanto:",                          sx, sy+lh*3.7);
+    text("   A = b × h",                         sx, sy+lh*4.7);
+  }
+
+  // ── ÁREA DO CÍRCULO ─────────────────────────────
+  if("ded_circulo".equals(deducao)){
+    deducaoEspecial = true;
+    float ccx=fX+fW/2, ccy=fY+fH/2, cr=min(fW,fH)/2*0.82;
+    fill(figura_fill); stroke(backgroundButton); strokeWeight(2);
+    circle(ccx, ccy, cr*2);
+    stroke(header_bg); strokeWeight(2);
+    line(ccx, ccy, ccx+cr, ccy);
+    fill(texto_dark); noStroke(); textSize(16); textAlign(CENTER, CENTER);
+    text("R", ccx+cr/2, ccy-16);
+    fill(header_bg); circle(ccx, ccy, 8);
+    textAlign(LEFT, TOP); textSize(17);
+    text("Arquimedes (250 a.C.) inscreveu polígonos", sx, sy);
+    text("dentro do círculo aumentando o número de", sx, sy+lh*0.8);
+    text("lados até a área se aproximar do círculo.", sx, sy+lh*1.6);
+    text("A dedução completa usa Cálculo Integral",   sx, sy+lh*2.8);
+    text("(nível superior). Resultado:",              sx, sy+lh*3.6);
+    text("   A = π × R²",                            sx, sy+lh*4.8);
+    text("π ≈ 3,14  |  R = raio do círculo",         sx, sy+lh*5.8);
+  }
+
+  // ── ÁREA DO HEXÁGONO ────────────────────────────
+  if("ded_hexagono".equals(deducao)){
+    deducaoEspecial = true;
+    float hcx=fX+fW/2, hcy=fY+fH/2, hr=min(fW,fH)/2*0.82;
+    float ang=TWO_PI/6;
+    stroke(backgroundButton); strokeWeight(1);
+    for(int i=0;i<6;i++){
+      float x1=hcx+cos(ang*i)*hr, y1=hcy+sin(ang*i)*hr;
+      float x2=hcx+cos(ang*(i+1))*hr, y2=hcy+sin(ang*(i+1))*hr;
+      fill(i%2==0 ? figura_fill : color(200,228,200));
+      triangle(hcx, hcy, x1, y1, x2, y2);
+    }
+    fill(texto_dark); noStroke(); textSize(16); textAlign(CENTER, CENTER);
+    text("a", hcx+cos(ang*0.5)*hr*1.32, hcy+sin(ang*0.5)*hr*1.32);
+    textAlign(LEFT, TOP); textSize(18);
+    text("1. O hexágono regular é formado por",    sx, sy);
+    text("   6 triângulos equiláteros de lado a.", sx, sy+lh*0.7);
+    text("2. Área de 1 triângulo = a² × √3 / 4",  sx, sy+lh*1.8);
+    text("3. Área total = 6 × (a² × √3 / 4)",     sx, sy+lh*3.0);
+    text("4. Simplificando:",                      sx, sy+lh*4.2);
+    text("   A = 3 × a² × √3 / 2",               sx, sy+lh*5.2);
+  }
+
+  // ── ÁREA DO LOSANGO ─────────────────────────────
+  if("ded_losango".equals(deducao)){
+    deducaoEspecial = true;
+    fill(220,235,220); stroke(160); strokeWeight(1);
+    rect(fX, fY, fW, fH);
+    fill(figura_fill); stroke(backgroundButton); strokeWeight(2);
+    quad(fX+fW/2, fY, fX+fW, fY+fH/2, fX+fW/2, fY+fH, fX, fY+fH/2);
+    noStroke();
+    fill(texto_dark); textSize(16); textAlign(CENTER, CENTER);
+    text("D", fX+fW/2, fY+fH+20);
+    text("d", fX-20,   fY+fH/2);
+    textAlign(LEFT, TOP); textSize(18);
+    text("1. O losango cabe na metade de um",  sx, sy);
+    text("   retângulo de lados D e d",        sx, sy+lh*0.7);
+    text("   (as diagonais do losango).",       sx, sy+lh*1.4);
+    text("2. Área do retângulo = D × d",       sx, sy+lh*2.6);
+    text("3. O losango ocupa metade disso.",   sx, sy+lh*3.8);
+    text("4. Portanto:",                       sx, sy+lh*5.0);
+    text("   A = D × d / 2",                  sx, sy+lh*6.0);
+  }
+
+  // ── ÁREA DO TRAPÉZIO ────────────────────────────
+  if("ded_trapezio".equals(deducao)){
+    deducaoEspecial = true;
+    float off=fW*0.20;
+    fill(figura_fill); stroke(backgroundButton); strokeWeight(2);
+    quad(fX, fY+fH, fX+fW, fY+fH, fX+fW-off, fY, fX+off, fY);
+    stroke(80); strokeWeight(1);
+    line(fX+off, fY, fX+off, fY+fH);
+    noStroke();
+    fill(texto_dark); textSize(16); textAlign(CENTER, CENTER);
+    text("B", fX+fW/2, fY+fH+20);
+    text("b", fX+fW/2, fY-15);
+    text("h", fX+off-20, fY+fH/2);
+    textAlign(LEFT, TOP); textSize(18);
+    text("1. Dois trapézios iguais unidos formam", sx, sy);
+    text("   um paralelogramo.",                   sx, sy+lh*0.7);
+    text("2. Esse paralelogramo tem:",             sx, sy+lh*1.8);
+    text("   base = B + b  e  altura = h",        sx, sy+lh*2.5);
+    text("3. Área paralelogramo = (B+b) × h",     sx, sy+lh*3.7);
+    text("4. Como usamos 2 trapézios:",           sx, sy+lh*4.9);
+    text("   A = (B+b) × h / 2",                 sx, sy+lh*5.9);
+  }
+
+  // ── FALLBACK: texto simples (3D, circunferência) ─
+  if(!deducaoEspecial){
+    noStroke(); fill(texto_dark);
+    textAlign(LEFT, TOP);
+    textSize(18);
+    text(deducao, cx + 26, cy + 66, cw - 52, ch - 76);
+  }
 
   if(keyPressed && key == ' '){
     deducao = "";
